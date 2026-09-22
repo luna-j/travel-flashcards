@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f5f3ee">
+  <title>旅行英语 100 张闪卡</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f3ee;
+      --surface: #fffdf8;
+      --surface-2: #ebe8df;
+      --text: #182330;
+      --muted: #68717b;
+      --accent: #28666e;
+      --accent-2: #e5a641;
+      --line: rgba(24, 35, 48, .12);
+      --shadow: 0 20px 60px rgba(26, 38, 48, .14);
+      --good: #237a57;
+      --maybe: #b47615;
+      --again: #b64d4d;
+    }
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #11181d;
+      --surface: #192228;
+      --surface-2: #243038;
+      --text: #f2f4ef;
+      --muted: #a9b3b8;
+      --accent: #6fc2c8;
+      --accent-2: #e7b765;
+      --line: rgba(255, 255, 255, .12);
+      --shadow: 0 20px 60px rgba(0, 0, 0, .32);
+      --good: #67c998;
+      --maybe: #e2af58;
+      --again: #e17c7c;
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-tap-highlight-color: transparent; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100dvh;
+      background:
+        radial-gradient(circle at 85% -10%, rgba(229, 166, 65, .20), transparent 34%),
+        radial-gradient(circle at -10% 70%, rgba(40, 102, 110, .15), transparent 30%),
+        var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      overflow-x: hidden;
+    }
+    button { font: inherit; color: inherit; }
+    .app {
+      width: min(100%, 760px);
+      margin: 0 auto;
+      padding: max(18px, env(safe-area-inset-top)) 16px max(28px, env(safe-area-inset-bottom));
+    }
+    .topbar { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+    .eyebrow { color: var(--accent); font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { margin: 5px 0 4px; font-size: clamp(25px, 7vw, 38px); line-height: 1.08; letter-spacing: -.03em; }
+    .subtitle { margin: 0; color: var(--muted); font-size: 14px; }
+    .icon-btn {
+      width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 50%;
+      background: color-mix(in srgb, var(--surface) 90%, transparent); cursor: pointer;
+      box-shadow: 0 8px 24px rgba(0,0,0,.06);
+    }
+    .progress-panel {
+      margin: 20px 0 14px; padding: 14px 15px; background: color-mix(in srgb, var(--surface) 92%, transparent);
+      border: 1px solid var(--line); border-radius: 18px; backdrop-filter: blur(12px);
+    }
+    .progress-head { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--muted); }
+    .progress-head strong { color: var(--text); font-size: 14px; }
+    .track { height: 8px; margin-top: 10px; background: var(--surface-2); border-radius: 99px; overflow: hidden; }
+    .fill { height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width .3s ease; }
+    .chips { display: flex; gap: 8px; margin: 0 -16px 14px; padding: 2px 16px 8px; overflow-x: auto; scrollbar-width: none; }
+    .chips::-webkit-scrollbar { display: none; }
+    .chip {
+      flex: 0 0 auto; border: 1px solid var(--line); border-radius: 99px; padding: 9px 13px;
+      background: var(--surface); color: var(--muted); font-size: 13px; cursor: pointer;
+    }
+    .chip.active { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 700; }
+    .card-meta { display: flex; justify-content: space-between; align-items: center; margin: 3px 3px 9px; color: var(--muted); font-size: 13px; }
+    .status-pill { padding: 4px 9px; border-radius: 99px; background: var(--surface-2); }
+    .stage { perspective: 1200px; }
+    .flashcard {
+      position: relative; width: 100%; height: clamp(350px, 55vh, 470px); padding: 0; border: 0;
+      background: transparent; cursor: pointer; border-radius: 28px; touch-action: pan-y;
+    }
+    .card-inner { position: absolute; inset: 0; transition: transform .5s cubic-bezier(.2,.7,.2,1); transform-style: preserve-3d; }
+    .flashcard.flipped .card-inner { transform: rotateY(180deg); }
+    .face {
+      position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between;
+      padding: 25px 24px 22px; border: 1px solid var(--line); border-radius: 28px;
+      background: var(--surface); box-shadow: var(--shadow); backface-visibility: hidden; -webkit-backface-visibility: hidden;
+      overflow: auto;
+    }
+    .front::before, .back::before {
+      content: ""; position: absolute; width: 170px; height: 170px; border-radius: 50%;
+      right: -65px; top: -70px; background: color-mix(in srgb, var(--accent-2) 20%, transparent);
+    }
+    .back { transform: rotateY(180deg); background: linear-gradient(145deg, var(--surface), color-mix(in srgb, var(--accent) 8%, var(--surface))); }
+    .face-label { position: relative; color: var(--accent); font-size: 12px; font-weight: 800; letter-spacing: .12em; }
+    .prompt { position: relative; margin: auto 0; font-size: clamp(27px, 7vw, 42px); line-height: 1.34; font-weight: 760; letter-spacing: -.02em; }
+    .answer { position: relative; margin: auto 0 12px; font-size: clamp(26px, 7vw, 42px); line-height: 1.28; font-weight: 760; letter-spacing: -.02em; color: var(--accent); }
+    .notes { color: var(--text); font-size: 15px; line-height: 1.55; }
+    .notes p { margin: 7px 0 0; }
+    .notes strong { color: var(--accent-2); }
+    .tap-hint { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 12px; }
+    .speech-row { display: flex; gap: 8px; margin-top: 16px; }
+    .speech-btn { border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; background: var(--surface); cursor: pointer; }
+    .voice-panel {
+      display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center;
+      margin-top: 12px; padding: 11px 12px; border: 1px solid var(--line); border-radius: 16px;
+      background: color-mix(in srgb, var(--surface) 92%, transparent);
+    }
+    .voice-copy { min-width: 0; }
+    .voice-copy label { display: block; margin-bottom: 4px; font-size: 12px; font-weight: 800; color: var(--accent); }
+    .voice-select {
+      width: 100%; min-height: 34px; border: 0; outline: 0; padding: 0; background: transparent;
+      color: var(--text); font: inherit; font-size: 13px; text-overflow: ellipsis;
+    }
+    .preview-btn {
+      min-height: 40px; border: 1px solid var(--line); border-radius: 12px; padding: 0 13px;
+      background: var(--surface-2); color: var(--text); cursor: pointer; font-weight: 750;
+    }
+    .nav-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; margin-top: 14px; }
+    .nav-btn { min-height: 48px; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); cursor: pointer; font-weight: 700; }
+    .random-btn { width: 48px; height: 48px; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); cursor: pointer; }
+    .random-btn.active { color: #fff; background: var(--accent); border-color: var(--accent); }
+    .ratings { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; opacity: .35; pointer-events: none; transition: opacity .2s ease; }
+    .ratings.ready { opacity: 1; pointer-events: auto; }
+    .rate-btn { min-height: 49px; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); cursor: pointer; font-weight: 750; }
+    .rate-btn[data-value="again"] { color: var(--again); }
+    .rate-btn[data-value="maybe"] { color: var(--maybe); }
+    .rate-btn[data-value="known"] { color: var(--good); }
+    .footer-actions { display: flex; justify-content: center; gap: 14px; margin-top: 18px; }
+    .text-btn { border: 0; background: transparent; color: var(--muted); padding: 8px; cursor: pointer; font-size: 13px; }
+    .toast {
+      position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); transform: translate(-50%, 18px);
+      opacity: 0; pointer-events: none; background: var(--text); color: var(--bg); padding: 10px 16px;
+      border-radius: 99px; font-size: 13px; transition: .25s ease; z-index: 10;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    @media (max-height: 690px) {
+      .flashcard { height: 330px; }
+      .progress-panel { margin-top: 12px; }
+      .face { padding: 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">Travel English</div>
+        <h1>旅行英语闪卡</h1>
+        <p class="subtitle">100 个真实场景 · 点击翻面 · 离线可用</p>
+      </div>
+      <button class="icon-btn" id="themeButton" aria-label="切换深色模式">◐</button>
+    </header>
+
+    <section class="progress-panel" aria-label="学习进度">
+      <div class="progress-head">
+        <span>总掌握进度</span>
+        <strong id="progressText">0 / 100</strong>
+      </div>
+      <div class="track"><div class="fill" id="progressFill"></div></div>
+    </section>
+
+    <nav class="chips" id="categoryChips" aria-label="闪卡分类"></nav>
+
+    <div class="card-meta">
+      <span id="positionText">1 / 100</span>
+      <span class="status-pill" id="statusText">未复习</span>
+    </div>
+
+    <section class="stage" aria-live="polite">
+      <button class="flashcard" id="flashcard" aria-label="点击翻转闪卡" aria-pressed="false">
+        <span class="card-inner">
+          <span class="face front">
+            <span class="face-label" id="frontLabel">中文任务</span>
+            <span class="prompt" id="prompt"></span>
+            <span class="tap-hint"><span>先大声说英文</span><span>点击看答案 →</span></span>
+          </span>
+          <span class="face back">
+            <span class="face-label">推荐表达</span>
+            <span>
+              <span class="answer" id="answer"></span>
+              <span class="notes" id="notes"></span>
+              <span class="speech-row">
+                <span class="speech-btn" data-rate="0.88">▶ 自然朗读</span>
+                <span class="speech-btn" data-rate="0.76">▶ 慢速跟读</span>
+              </span>
+            </span>
+            <span class="tap-hint"><span>说对意思即可</span><span>点击回到正面 ↩</span></span>
+          </span>
+        </span>
+      </button>
+    </section>
+
+    <section class="voice-panel" aria-label="朗读音色设置">
+      <div class="voice-copy">
+        <label for="voiceSelect">朗读音色 · 已排除怪声和特效声音</label>
+        <select class="voice-select" id="voiceSelect">
+          <option value="">自动选择自然音色</option>
+        </select>
+      </div>
+      <button class="preview-btn" id="previewVoiceButton">试听</button>
+    </section>
+
+    <div class="nav-row">
+      <button class="nav-btn" id="prevButton">← 上一张</button>
+      <button class="random-btn" id="randomButton" aria-label="切换随机抽卡" title="随机抽卡">⌘</button>
+      <button class="nav-btn" id="nextButton">下一张 →</button>
+    </div>
+
+    <div class="ratings" id="ratings" aria-label="标记掌握程度">
+      <button class="rate-btn" data-value="again">❌ 不会</button>
+      <button class="rate-btn" data-value="maybe">△ 模糊</button>
+      <button class="rate-btn" data-value="known">✓ 会了</button>
+    </div>
+
+    <div class="footer-actions">
+      <button class="text-btn" id="reviewButton">只复习不会和模糊</button>
+      <button class="text-btn" id="resetButton">重置进度</button>
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script id="cardData" type="application/json">[{"id": 1, "category": "万能开口", "prompt": "我需要帮助。", "answer": "I need help.", "notes": "<p>更礼貌：<strong>Could you help me, please?<\/strong><\/p>"}, {"id": 2, "category": "万能开口", "prompt": "我想办理入住。", "answer": "I'd like to check in.", "notes": ""}, {"id": 3, "category": "万能开口", "prompt": "我有预订。", "answer": "I have a reservation.", "notes": "<p>补充姓名：<strong>It&#x27;s under the name Li.<\/strong><\/p>"}, {"id": 4, "category": "万能开口", "prompt": "附近有洗手间吗？", "answer": "Is there a restroom nearby?", "notes": ""}, {"id": 5, "category": "万能开口", "prompt": "我没听清。", "answer": "Sorry, I didn't catch that.", "notes": ""}, {"id": 6, "category": "万能开口", "prompt": "你能再说一遍吗？", "answer": "Could you say that again?", "notes": ""}, {"id": 7, "category": "万能开口", "prompt": "你能说慢一点吗？", "answer": "Could you speak a little more slowly?", "notes": ""}, {"id": 8, "category": "万能开口", "prompt": "你能写下来吗？", "answer": "Could you write it down?", "notes": ""}, {"id": 9, "category": "万能开口", "prompt": "你是指这个吗？", "answer": "Do you mean this one?", "notes": ""}, {"id": 10, "category": "万能开口", "prompt": "我确认一下自己是否理解正确。", "answer": "Let me make sure I understood.", "notes": "<p>确认结尾：<strong>..., right?<\/strong><\/p>"}, {"id": 11, "category": "机场飞行", "prompt": "这趟航班的值机柜台在哪里？", "answer": "Where is the check-in counter for this flight?", "notes": ""}, {"id": 12, "category": "机场飞行", "prompt": "我想办理 CA937 航班的值机。", "answer": "I'd like to check in for flight CA937.", "notes": ""}, {"id": 13, "category": "机场飞行", "prompt": "可以给我靠过道的座位吗？", "answer": "Could I have an aisle seat?", "notes": "<p>靠窗：<strong>a window seat<\/strong><\/p>"}, {"id": 14, "category": "机场飞行", "prompt": "这个票价含托运行李吗？", "answer": "Does this fare include checked baggage?", "notes": ""}, {"id": 15, "category": "机场飞行", "prompt": "我的行李超重了吗？", "answer": "Is my bag overweight?", "notes": ""}, {"id": 16, "category": "机场飞行", "prompt": "我应该去哪个登机口？", "answer": "Which gate should I go to?", "notes": ""}, {"id": 17, "category": "机场飞行", "prompt": "几点开始登机？", "answer": "What time does boarding start?", "notes": ""}, {"id": 18, "category": "机场飞行", "prompt": "我要取出托运行李吗？", "answer": "Do I need to collect my luggage?", "notes": ""}, {"id": 19, "category": "机场飞行", "prompt": "我可能赶不上转机航班。", "answer": "I may miss my connecting flight.", "notes": ""}, {"id": 20, "category": "机场飞行", "prompt": "能帮我改签到最近的航班吗？", "answer": "Could you put me on the next available flight?", "notes": ""}, {"id": 21, "category": "入境交通", "prompt": "我来旅游。", "answer": "I'm here for tourism.", "notes": "<p>自然补充：<strong>I&#x27;ll be staying for ten days.<\/strong><\/p>"}, {"id": 22, "category": "入境交通", "prompt": "我会住在中央酒店。", "answer": "I'll be staying at the Central Hotel.", "notes": ""}, {"id": 23, "category": "入境交通", "prompt": "去市中心最方便的方法是什么？", "answer": "What's the easiest way to get to the city center?", "notes": ""}, {"id": 24, "category": "入境交通", "prompt": "走路能到吗？", "answer": "Is it within walking distance?", "notes": ""}, {"id": 25, "category": "入境交通", "prompt": "能在地图上指给我看吗？", "answer": "Could you show me on the map?", "notes": ""}, {"id": 26, "category": "入境交通", "prompt": "我该坐哪条线？", "answer": "Which line should I take?", "notes": ""}, {"id": 27, "category": "入境交通", "prompt": "我在哪里换乘？", "answer": "Where do I change trains?", "notes": ""}, {"id": 28, "category": "入境交通", "prompt": "我应该走哪个出口？", "answer": "Which exit should I use?", "notes": ""}, {"id": 29, "category": "入境交通", "prompt": "到了请告诉我。", "answer": "Please let me know when we get there.", "notes": ""}, {"id": 30, "category": "入境交通", "prompt": "可以让我在这里下车吗？", "answer": "Could you drop me off here?", "notes": ""}, {"id": 31, "category": "酒店住宿", "prompt": "预订人姓名是 Chen。", "answer": "The reservation is under the name Chen.", "notes": ""}, {"id": 32, "category": "酒店住宿", "prompt": "含早餐吗？", "answer": "Is breakfast included?", "notes": ""}, {"id": 33, "category": "酒店住宿", "prompt": "早餐几点供应？", "answer": "What time is breakfast served?", "notes": ""}, {"id": 34, "category": "酒店住宿", "prompt": "Wi-Fi 密码是什么？", "answer": "What's the Wi-Fi password?", "notes": ""}, {"id": 35, "category": "酒店住宿", "prompt": "可以再给我一条毛巾吗？", "answer": "Could I get an extra towel?", "notes": ""}, {"id": 36, "category": "酒店住宿", "prompt": "房卡不能用。", "answer": "The key card doesn't work.", "notes": ""}, {"id": 37, "category": "酒店住宿", "prompt": "我的房间没有热水。", "answer": "There's no hot water in my room.", "notes": ""}, {"id": 38, "category": "酒店住宿", "prompt": "能请人来看一下吗？", "answer": "Could someone take a look at it?", "notes": ""}, {"id": 39, "category": "酒店住宿", "prompt": "能给我换一间房吗？", "answer": "Could you move me to another room?", "notes": ""}, {"id": 40, "category": "酒店住宿", "prompt": "可以帮我寄存行李到下午吗？", "answer": "Could you store my luggage until this afternoon?", "notes": ""}, {"id": 41, "category": "餐厅饮食", "prompt": "请安排一张两人桌。", "answer": "A table for two, please.", "notes": ""}, {"id": 42, "category": "餐厅饮食", "prompt": "今天的特色菜是什么？", "answer": "What's today's special?", "notes": ""}, {"id": 43, "category": "餐厅饮食", "prompt": "你推荐什么？", "answer": "What do you recommend?", "notes": ""}, {"id": 44, "category": "餐厅饮食", "prompt": "这道菜配什么？", "answer": "What does this come with?", "notes": ""}, {"id": 45, "category": "餐厅饮食", "prompt": "这份够两个人吃吗？", "answer": "Is this enough for two people?", "notes": ""}, {"id": 46, "category": "餐厅饮食", "prompt": "我不要洋葱。", "answer": "I'd like it without onions.", "notes": ""}, {"id": 47, "category": "餐厅饮食", "prompt": "我对花生过敏。", "answer": "I'm allergic to peanuts.", "notes": ""}, {"id": 48, "category": "餐厅饮食", "prompt": "这含坚果吗？", "answer": "Does this contain nuts?", "notes": "<p>重要升级：<strong>Could you please check with the kitchen?<\/strong><\/p>"}, {"id": 49, "category": "餐厅饮食", "prompt": "请结账。", "answer": "Could we have the bill, please?", "notes": "<p>美式英语也常说：<strong>Could we have the check, please?<\/strong><\/p>"}, {"id": 50, "category": "餐厅饮食", "prompt": "我们可以分开付款吗？", "answer": "Can we pay separately?", "notes": ""}, {"id": 51, "category": "购物景点", "prompt": "我在找旅行转换插头。", "answer": "I'm looking for a travel adapter.", "notes": ""}, {"id": 52, "category": "购物景点", "prompt": "这个有小一点的尺码吗？", "answer": "Do you have this in a smaller size?", "notes": ""}, {"id": 53, "category": "购物景点", "prompt": "我可以试穿吗？", "answer": "Could I try this on?", "notes": ""}, {"id": 54, "category": "购物景点", "prompt": "买两个有折扣吗？", "answer": "Is there a discount if I buy two?", "notes": ""}, {"id": 55, "category": "购物景点", "prompt": "请按当地货币结算。", "answer": "Could you charge me in the local currency?", "notes": ""}, {"id": 56, "category": "购物景点", "prompt": "我想退掉这个。", "answer": "I'd like to return this.", "notes": "<p>说明原因：<strong>It&#x27;s damaged. / It doesn&#x27;t fit.<\/strong><\/p>"}, {"id": 57, "category": "购物景点", "prompt": "这个可以退税吗？", "answer": "Is this eligible for a tax refund?", "notes": ""}, {"id": 58, "category": "购物景点", "prompt": "有英文导览吗？", "answer": "Is there a guided tour in English?", "notes": ""}, {"id": 59, "category": "购物景点", "prompt": "可以拍照吗？", "answer": "Are photos allowed?", "notes": ""}, {"id": 60, "category": "购物景点", "prompt": "能帮我们拍张照片吗？", "answer": "Could you take a photo of us?", "notes": ""}, {"id": 61, "category": "医疗应急", "prompt": "你们卖预付费 SIM 卡吗？", "answer": "Do you sell prepaid SIM cards?", "notes": ""}, {"id": 62, "category": "医疗应急", "prompt": "能帮我激活吗？", "answer": "Could you help me activate it?", "notes": ""}, {"id": 63, "category": "医疗应急", "prompt": "我不舒服。", "answer": "I don't feel well.", "notes": ""}, {"id": 64, "category": "医疗应急", "prompt": "我从昨晚开始一直呕吐。", "answer": "I've been vomiting since last night.", "notes": ""}, {"id": 65, "category": "医疗应急", "prompt": "情况越来越严重。", "answer": "It's getting worse.", "notes": ""}, {"id": 66, "category": "医疗应急", "prompt": "附近有药店吗？", "answer": "Is there a pharmacy nearby?", "notes": ""}, {"id": 67, "category": "医疗应急", "prompt": "多久服用一次？", "answer": "How often should I take it?", "notes": ""}, {"id": 68, "category": "医疗应急", "prompt": "请叫救护车。", "answer": "Please call an ambulance.", "notes": ""}, {"id": 69, "category": "医疗应急", "prompt": "我的护照丢了。", "answer": "I've lost my passport.", "notes": ""}, {"id": 70, "category": "医疗应急", "prompt": "我想报案。", "answer": "I'd like to report a theft.", "notes": "<p>索要记录：<strong>Could I have a copy of the police report?<\/strong><\/p>"}, {"id": 71, "category": "当地交流", "prompt": "这是你第一次来这里吗？", "answer": "Is this your first time here?", "notes": ""}, {"id": 72, "category": "当地交流", "prompt": "我来自中国，要在欧洲旅行两周。", "answer": "I'm from China, and I'm traveling around Europe for two weeks.", "notes": ""}, {"id": 73, "category": "当地交流", "prompt": "什么原因让你来到这里？", "answer": "What brings you here?", "notes": ""}, {"id": 74, "category": "当地交流", "prompt": "到目前为止你最喜欢什么？", "answer": "What have you enjoyed most so far?", "notes": ""}, {"id": 75, "category": "当地交流", "prompt": "我一直想来这座城市。", "answer": "I've always wanted to visit this city.", "notes": ""}, {"id": 76, "category": "当地交流", "prompt": "这座城市比我想象中更悠闲。", "answer": "The city is more relaxed than I expected.", "notes": ""}, {"id": 77, "category": "当地交流", "prompt": "这次旅行最精彩的是老城区。", "answer": "The highlight of my trip has been the old town.", "notes": ""}, {"id": 78, "category": "当地交流", "prompt": "当地人通常去哪里吃饭？", "answer": "Where do locals usually eat?", "notes": ""}, {"id": 79, "category": "当地交流", "prompt": "有什么是我不该错过的吗？", "answer": "Is there anything I shouldn't miss?", "notes": ""}, {"id": 80, "category": "当地交流", "prompt": "很高兴和你聊天。", "answer": "It was nice talking to you.", "notes": ""}, {"id": 81, "category": "澄清协商", "prompt": "我可能误解了。", "answer": "I may have misunderstood.", "notes": ""}, {"id": 82, "category": "澄清协商", "prompt": "我的意思是……", "answer": "What I mean is...", "notes": ""}, {"id": 83, "category": "澄清协商", "prompt": "你的意思是我需要再付一次钱吗？", "answer": "Are you saying that I need to pay again?", "notes": ""}, {"id": 84, "category": "澄清协商", "prompt": "我理解，但这不是我预订的内容。", "answer": "I understand, but this isn't what I booked.", "notes": ""}, {"id": 85, "category": "澄清协商", "prompt": "确认单上写着包含早餐。", "answer": "The confirmation says breakfast is included.", "notes": ""}, {"id": 86, "category": "澄清协商", "prompt": "能请你再核对一下吗？", "answer": "Could you please check again?", "notes": ""}, {"id": 87, "category": "澄清协商", "prompt": "有其他解决办法吗？", "answer": "Is there another solution?", "notes": ""}, {"id": 88, "category": "澄清协商", "prompt": "可以请负责人来一下吗？", "answer": "Could I speak to the manager, please?", "notes": ""}, {"id": 89, "category": "澄清协商", "prompt": "能退还差价吗？", "answer": "Could you refund the difference?", "notes": ""}, {"id": 90, "category": "澄清协商", "prompt": "我想账单上有一处错误。", "answer": "I think there's a mistake on my bill.", "notes": ""}, {"id": 91, "category": "表达升级", "prompt": "我以前从未试过这个。", "answer": "I've never tried this before.", "notes": ""}, {"id": 92, "category": "表达升级", "prompt": "我来这里三天了。", "answer": "I've been here for three days.", "notes": ""}, {"id": 93, "category": "表达升级", "prompt": "如果下雨，行程会取消吗？", "answer": "If it rains, is the tour canceled?", "notes": ""}, {"id": 94, "category": "表达升级", "prompt": "如果可以，我想要高楼层的房间。", "answer": "If possible, I'd like a room on a higher floor.", "notes": ""}, {"id": 95, "category": "表达升级", "prompt": "房间很小，但非常舒适。", "answer": "The room is small, but it's very comfortable.", "notes": ""}, {"id": 96, "category": "表达升级", "prompt": "我在找一家供应当地食物的餐厅。", "answer": "I'm looking for a restaurant that serves local food.", "notes": ""}, {"id": 97, "category": "表达升级", "prompt": "标志上写着博物馆关闭。", "answer": "The sign says the museum is closed.", "notes": ""}, {"id": 98, "category": "表达升级", "prompt": "我不完全确定，但我想它六点关门。", "answer": "I'm not completely sure, but I think it closes at six.", "notes": ""}, {"id": 99, "category": "表达升级", "prompt": "我理解你的意思，不过我的经历有点不同。", "answer": "I see what you mean, but my experience was a little different.", "notes": ""}, {"id": 100, "category": "表达升级", "prompt": "回答“这是你第一次来吗？”，并把对话继续下去。", "answer": "Yes, it is. I arrived two days ago, and I've really enjoyed the food. What local dish would you recommend?", "notes": "<p>公式：<strong>回答 + 一个真实细节 + 相关反问<\/strong><\/p>"}]</script>
+  <script>
+    const cards = JSON.parse(document.getElementById('cardData').textContent);
+    const storageKey = 'travel-english-flashcards-v1';
+    const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+    const state = {
+      statuses: saved.statuses || {},
+      category: saved.category || '全部',
+      currentId: saved.currentId || 1,
+      random: saved.random || false,
+      reviewOnly: saved.reviewOnly || false,
+      voiceName: saved.voiceName || '',
+      theme: saved.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
+      flipped: false
+    };
+
+    const $ = (selector) => document.querySelector(selector);
+    const flashcard = $('#flashcard');
+    const promptEl = $('#prompt');
+    const answerEl = $('#answer');
+    const notesEl = $('#notes');
+    const ratingsEl = $('#ratings');
+    const categoryNames = ['全部', ...new Set(cards.map(card => card.category))];
+    let touchStartX = 0;
+
+    function save() {
+      localStorage.setItem(storageKey, JSON.stringify({
+        statuses: state.statuses,
+        category: state.category,
+        currentId: state.currentId,
+        random: state.random,
+        reviewOnly: state.reviewOnly,
+        voiceName: state.voiceName,
+        theme: state.theme
+      }));
+    }
+
+    function visibleCards() {
+      let list = cards.filter(card => state.category === '全部' || card.category === state.category);
+      if (state.reviewOnly) list = list.filter(card => state.statuses[card.id] !== 'known');
+      return list;
+    }
+
+    function currentCard() {
+      const list = visibleCards();
+      if (!list.length) return null;
+      return list.find(card => card.id === state.currentId) || list[0];
+    }
+
+    function statusLabel(value) {
+      return {known: '✓ 已掌握', maybe: '△ 模糊', again: '❌ 不会'}[value] || '未复习';
+    }
+
+    function renderChips() {
+      $('#categoryChips').innerHTML = categoryNames.map(name =>
+        `<button class="chip ${state.category === name ? 'active' : ''}" data-category="${name}">${name}</button>`
+      ).join('');
+    }
+
+    function render() {
+      document.documentElement.dataset.theme = state.theme;
+      const list = visibleCards();
+      if (!list.length) {
+        state.reviewOnly = false;
+        showToast('这一组已经全部掌握！');
+        return render();
+      }
+      let card = currentCard();
+      if (!list.some(item => item.id === state.currentId)) {
+        state.currentId = list[0].id;
+        card = list[0];
+      }
+      const index = list.findIndex(item => item.id === card.id);
+      promptEl.textContent = card.prompt;
+      answerEl.textContent = card.answer;
+      notesEl.innerHTML = card.notes;
+      $('#frontLabel').textContent = `${String(card.id).padStart(2, '0')} · ${card.category}`;
+      $('#positionText').textContent = `${index + 1} / ${list.length}`;
+      $('#statusText').textContent = statusLabel(state.statuses[card.id]);
+      flashcard.classList.toggle('flipped', state.flipped);
+      flashcard.setAttribute('aria-pressed', String(state.flipped));
+      ratingsEl.classList.toggle('ready', state.flipped);
+      $('#randomButton').classList.toggle('active', state.random);
+      $('#reviewButton').textContent = state.reviewOnly ? '查看当前分类全部卡片' : '只复习不会和模糊';
+      const known = Object.values(state.statuses).filter(value => value === 'known').length;
+      $('#progressText').textContent = `${known} / 100`;
+      $('#progressFill').style.width = `${known}%`;
+      renderChips();
+      save();
+    }
+
+    function move(direction) {
+      speechSynthesis.cancel();
+      const list = visibleCards();
+      if (!list.length) return;
+      const currentIndex = Math.max(0, list.findIndex(card => card.id === state.currentId));
+      let nextIndex;
+      if (state.random && list.length > 1) {
+        do { nextIndex = Math.floor(Math.random() * list.length); } while (nextIndex === currentIndex);
+      } else {
+        nextIndex = (currentIndex + direction + list.length) % list.length;
+      }
+      state.currentId = list[nextIndex].id;
+      state.flipped = false;
+      render();
+    }
+
+    function flip() {
+      state.flipped = !state.flipped;
+      render();
+    }
+
+    function mark(value) {
+      const card = currentCard();
+      if (!card) return;
+      state.statuses[card.id] = value;
+      showToast(statusLabel(value));
+      save();
+      setTimeout(() => move(1), 160);
+    }
+
+    const noveltyVoicePattern = /Albert|Bad News|Bahh|Bells|Boing|Bubbles|Cellos|Deranged|Good News|Hysterical|Pipe Organ|Princess|Ralph|Trinoids|Whisper|Wobble|Zarvox|Organ|Novelty/i;
+
+    function englishVoices() {
+      if (!('speechSynthesis' in window)) return [];
+      return speechSynthesis.getVoices().filter(voice =>
+        /^en([-_]|$)/i.test(voice.lang) && !noveltyVoicePattern.test(voice.name)
+      );
+    }
+
+    function voiceScore(voice) {
+      let score = 0;
+      const name = voice.name;
+      if (/Natural|Premium|Enhanced/i.test(name)) score += 120;
+      if (/Microsoft (Aria|Jenny|Guy|Sonia|Ryan)/i.test(name)) score += 110;
+      if (/Ava/i.test(name)) score += 105;
+      if (/Samantha|Serena|Zoe/i.test(name)) score += 100;
+      if (/Google US English/i.test(name)) score += 95;
+      if (/Karen|Moira|Tessa|Daniel/i.test(name)) score += 75;
+      if (/^en-US$/i.test(voice.lang)) score += 25;
+      if (voice.localService) score += 8;
+      return score;
+    }
+
+    function recommendedVoice() {
+      return [...englishVoices()].sort((a, b) => voiceScore(b) - voiceScore(a))[0] || null;
+    }
+
+    function selectedVoice() {
+      const voices = englishVoices();
+      return voices.find(voice => voice.name === state.voiceName) || recommendedVoice();
+    }
+
+    function populateVoices() {
+      const select = $('#voiceSelect');
+      const voices = [...englishVoices()].sort((a, b) => voiceScore(b) - voiceScore(a) || a.name.localeCompare(b.name));
+      const recommended = recommendedVoice();
+      select.innerHTML = `<option value="">自动推荐${recommended ? `：${recommended.name}` : ''}</option>` +
+        voices.map(voice => `<option value="${voice.name.replaceAll('&', '&amp;').replaceAll('"', '&quot;')}">${voice.name} · ${voice.lang}</option>`).join('');
+      select.value = voices.some(voice => voice.name === state.voiceName) ? state.voiceName : '';
+    }
+
+    function speakText(text, rate = 0.88) {
+      if (!('speechSynthesis' in window)) return showToast('当前浏览器不支持语音朗读');
+      speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = rate;
+      utterance.pitch = rate < 0.8 ? 1.02 : 1.04;
+      utterance.volume = 1;
+      utterance.voice = selectedVoice();
+      speechSynthesis.speak(utterance);
+    }
+
+    function speak(rate) {
+      const card = currentCard();
+      if (card) speakText(card.answer, rate);
+    }
+
+    let toastTimer;
+    function showToast(message) {
+      const toast = $('#toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 1500);
+    }
+
+    flashcard.addEventListener('click', event => {
+      const speechButton = event.target.closest('.speech-btn');
+      if (speechButton) {
+        event.stopPropagation();
+        speak(Number(speechButton.dataset.rate));
+        return;
+      }
+      flip();
+    });
+    flashcard.addEventListener('pointerdown', event => { touchStartX = event.clientX; });
+    flashcard.addEventListener('pointerup', event => {
+      const distance = event.clientX - touchStartX;
+      if (Math.abs(distance) > 65) move(distance < 0 ? 1 : -1);
+    });
+    $('#prevButton').addEventListener('click', () => move(-1));
+    $('#nextButton').addEventListener('click', () => move(1));
+    $('#randomButton').addEventListener('click', () => {
+      state.random = !state.random;
+      showToast(state.random ? '随机抽卡已开启' : '顺序复习已开启');
+      render();
+    });
+    ratingsEl.addEventListener('click', event => {
+      const button = event.target.closest('.rate-btn');
+      if (button) mark(button.dataset.value);
+    });
+    $('#categoryChips').addEventListener('click', event => {
+      const chip = event.target.closest('.chip');
+      if (!chip) return;
+      state.category = chip.dataset.category;
+      state.currentId = visibleCards()[0]?.id || 1;
+      state.flipped = false;
+      render();
+    });
+    $('#reviewButton').addEventListener('click', () => {
+      state.reviewOnly = !state.reviewOnly;
+      state.currentId = visibleCards()[0]?.id || 1;
+      state.flipped = false;
+      render();
+    });
+    $('#themeButton').addEventListener('click', () => {
+      state.theme = state.theme === 'dark' ? 'light' : 'dark';
+      render();
+    });
+    $('#voiceSelect').addEventListener('change', event => {
+      state.voiceName = event.target.value;
+      save();
+      const voice = selectedVoice();
+      showToast(voice ? `已选择 ${voice.name}` : '已使用系统默认音色');
+    });
+    $('#previewVoiceButton').addEventListener('click', () => {
+      speakText('Excuse me, could you help me, please?', 0.88);
+    });
+    $('#resetButton').addEventListener('click', () => {
+      if (!confirm('确定要清空全部 100 张卡的学习记录吗？')) return;
+      state.statuses = {};
+      state.reviewOnly = false;
+      state.currentId = 1;
+      render();
+      showToast('学习进度已重置');
+    });
+    document.addEventListener('keydown', event => {
+      if (event.code === 'Space') { event.preventDefault(); flip(); }
+      if (event.key === 'ArrowRight') move(1);
+      if (event.key === 'ArrowLeft') move(-1);
+      if (state.flipped && event.key === '1') mark('again');
+      if (state.flipped && event.key === '2') mark('maybe');
+      if (state.flipped && event.key === '3') mark('known');
+    });
+    if ('speechSynthesis' in window) {
+      speechSynthesis.addEventListener?.('voiceschanged', populateVoices);
+      populateVoices();
+      setTimeout(populateVoices, 250);
+    }
+    render();
+  </script>
+</body>
+</html>

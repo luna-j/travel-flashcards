@@ -135,7 +135,7 @@
     .rate-btn[data-value="maybe"] { color: var(--maybe); }
     .rate-btn[data-value="known"] { color: var(--good); }
     .footer-actions { display: flex; justify-content: center; gap: 14px; margin-top: 18px; }
-    .text-btn { border: 0; background: transparent; color: var(--muted); padding: 8px; cursor: pointer; font-size: 13px; }
+    .text-btn { border: 0; background: transparent; color: var(--muted); padding: 8px; cursor: pointer; font-size: 13px; text-decoration: none; }
     .toast {
       position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); transform: translate(-50%, 18px);
       opacity: 0; pointer-events: none; background: var(--text); color: var(--bg); padding: 10px 16px;
@@ -225,6 +225,7 @@
     </div>
 
     <div class="footer-actions">
+      <a class="text-btn" href="korean-pronunciation.html">韩语字母与发音</a>
       <button class="text-btn" id="reviewButton">只复习不会和模糊</button>
       <button class="text-btn" id="resetButton">重置进度</button>
     </div>

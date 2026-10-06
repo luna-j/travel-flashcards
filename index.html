@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#f5f3ee">
   <title>旅行语言闪卡</title>
   <style>
-    :root { color-scheme: light; --bg:#f5f3ee; --card:#fffdf8; --text:#182330; --muted:#69727b; --en:#28666e; --ko:#9b4b55; }
+    :root { color-scheme: light; --bg:#f5f3ee; --card:#fffdf8; --text:#182330; --muted:#69727b; --en:#28666e; --ko:#9b4b55; --sound:#7b5a2e; }
     * { box-sizing:border-box; }
     body {
       margin:0; min-height:100vh; min-height:100dvh; display:grid; place-items:center;
@@ -27,10 +27,12 @@
     .tag { display:inline-block; margin-bottom:20px; padding:6px 10px; border-radius:99px; color:#fff; font-size:12px; font-weight:800; }
     .english .tag { background:var(--en); }
     .korean .tag { background:var(--ko); }
+    .sound .tag { background:var(--sound); }
     h2 { margin:0 0 8px; font-size:25px; }
     .card p { margin:0; color:var(--muted); line-height:1.55; }
     .arrow { display:block; margin-top:22px; color:var(--en); font-weight:800; }
     .korean .arrow { color:var(--ko); }
+    .sound .arrow { color:var(--sound); }
     footer { margin-top:22px; color:var(--muted); font-size:12px; text-align:center; }
     @media (min-width:620px) { .grid { grid-template-columns:1fr 1fr; } }
   </style>
@@ -39,7 +41,7 @@
   <main>
     <div class="eyebrow">Travel Language Cards</div>
     <h1>旅行语言闪卡</h1>
-    <p class="lead">选择语言开始复习。支持手机浏览、点击翻面、进度记录和语音跟读。</p>
+    <p class="lead">选择旅行句子或发音基础模块。支持手机浏览、点击翻面和语音跟读。</p>
     <div class="grid">
       <a class="card english" href="english.html">
         <span class="tag">ENGLISH</span>
@@ -52,6 +54,18 @@
         <h2>旅行韩语 100 句</h2>
         <p>中文提示、罗马音、Yuna 固定录音。</p>
         <span class="arrow">开始复习 →</span>
+      </a>
+      <a class="card sound" href="korean-pronunciation.html">
+        <span class="tag">한글 SOUND</span>
+        <h2>韩语字母与拼音</h2>
+        <p>40个字母、拼读规则、简短联想与 Yuna 录音。</p>
+        <span class="arrow">学习发音 →</span>
+      </a>
+      <a class="card sound" href="japanese-pronunciation.html">
+        <span class="tag">かな SOUND</span>
+        <h2>日语假名与发音</h2>
+        <p>46个基础假名、发音规则、联想与 Kyoko 录音。</p>
+        <span class="arrow">学习发音 →</span>
       </a>
     </div>
     <footer>内容与学习进度保存在你的设备中</footer>

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#eef4f2">
   <title>韩语字母与拼音规则</title>
+  <script>if(document.title===['__','TITLE__'].join(''))location.replace('travel-flashcards-pages/index.html')</script>
   <style>
     :root{--bg:#f5f3ee;--surface:#fffdf8;--surface2:#ebe8df;--text:#182330;--muted:#68717b;--accent:#28666e;--warm:#d99338;--line:rgba(24,35,48,.12);--shadow:0 16px 42px rgba(26,38,48,.12)}
     *{box-sizing:border-box}html{-webkit-tap-highlight-color:transparent;scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 92% -5%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 28%),var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}button,a{font:inherit}.app{width:min(100%,980px);margin:auto;padding:max(20px,env(safe-area-inset-top)) 16px max(36px,env(safe-area-inset-bottom))}.back{display:inline-flex;align-items:center;gap:6px;color:var(--accent);text-decoration:none;font-size:14px;font-weight:750}.eyebrow{margin-top:24px;color:var(--accent);font-size:12px;font-weight:850;letter-spacing:.14em;text-transform:uppercase}h1{margin:7px 0 8px;font-size:clamp(32px,9vw,52px);line-height:1.08;letter-spacing:-.04em}.lead{max-width:720px;margin:0;color:var(--muted);line-height:1.7}.tip{margin:20px 0;padding:13px 15px;border-left:4px solid var(--warm);border-radius:0 13px 13px 0;background:color-mix(in srgb,var(--warm) 10%,var(--surface));font-size:14px;line-height:1.6}
@@ -60,7 +61,7 @@
 <script>
   const config=JSON.parse(document.getElementById('moduleData').textContent);
   const $=s=>document.querySelector(s);const groups=['全部',...new Set(config.cards.map(c=>c.group))];
-  let mode='learn',activeGroup='全部',testIndex=0,flipped=false,randomMode=false,activeAudio=null,activeButton=null,touchStartX=0;
+  let mode='learn',activeGroup='全部',testIndex=0,flipped=false,randomMode=false,activeAudio=null,activeButton=null,touchStartX=0,ignoreClickUntil=0;
   function esc(s){return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;')}
   function visibleCards(){return activeGroup==='全部'?config.cards:config.cards.filter(c=>c.group===activeGroup)}
   function audioButton(label,audio,speech,extra=''){return `<button class="audio-btn ${extra}" data-audio="${esc(audio)}" data-speech="${esc(speech)}">▶ ${label}</button>`}
@@ -79,9 +80,9 @@
   document.querySelector('.mode-tabs').addEventListener('click',e=>{const b=e.target.closest('.mode-btn');if(b)setMode(b.dataset.mode)});
   $('#chips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;activeGroup=b.dataset.group;testIndex=0;flipped=false;renderChips();renderLearning();renderTest()});
   $('#grid').addEventListener('click',e=>{const b=e.target.closest('.audio-btn');if(b)play(b)});
-  $('#testCard').addEventListener('click',e=>{const b=e.target.closest('.audio-btn');if(b){e.stopPropagation();play(b)}else flip()});
+  $('#testCard').addEventListener('click',e=>{if(Date.now()<ignoreClickUntil)return;const b=e.target.closest('.audio-btn');if(b){e.stopPropagation();play(b)}else flip()});
   $('#testCard').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&!e.target.closest('.audio-btn')){e.preventDefault();flip()}});
-  $('#testCard').addEventListener('pointerdown',e=>{touchStartX=e.clientX});$('#testCard').addEventListener('pointerup',e=>{const d=e.clientX-touchStartX;if(Math.abs(d)>65)move(d<0?1:-1)});
+  $('#testCard').addEventListener('pointerdown',e=>{touchStartX=e.clientX});$('#testCard').addEventListener('pointerup',e=>{const d=e.clientX-touchStartX;if(Math.abs(d)>65){ignoreClickUntil=Date.now()+400;move(d<0?1:-1)}});
   $('#prevButton').addEventListener('click',()=>move(-1));$('#nextButton').addEventListener('click',()=>move(1));$('#randomButton').addEventListener('click',()=>{randomMode=!randomMode;renderTest();toast(randomMode?'随机抽卡已开启':'顺序复习已开启')});
   renderRules();renderChips();renderLearning();renderTest();
 </script></body></html>

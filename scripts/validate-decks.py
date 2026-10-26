@@ -4,7 +4,10 @@ from pathlib import Path
 root=Path(__file__).resolve().parents[1]
 decks=json.loads((root/'data/decks.json').read_text())
 assert len({d['id'] for d in decks})==len(decks)
-for d in decks:assert (root/d['href']).is_file(),d['href']
+for d in decks:
+ assert (root/d['href']).is_file(),d['href']
+ page=(root/d['href']).read_text()
+ assert 'class="icon-btn home-button" href="index.html" aria-label="返回首页"' in page, 'Missing standard home link: '+d['href']
 cards=json.loads((root/'data/sejong-lesson1.json').read_text())
 assert len(cards)==48 and len({c['id'] for c in cards})==48
 for c in cards:

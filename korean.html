@@ -150,7 +150,7 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
     }
-  </style>
+  .header-actions{display:flex;gap:8px;align-items:center}.home-button{color:var(--text);display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;text-decoration:none;font-size:22px;line-height:1}.home-button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}</style>
 </head>
 <body>
   <main class="app">
@@ -160,7 +160,7 @@
         <h1>旅行韩语闪卡</h1>
         <p class="subtitle">100 个真实场景 · 点击翻面 · 离线可用</p>
       </div>
-      <button class="icon-btn" id="themeButton" aria-label="切换深色模式">◐</button>
+      <div class="header-actions"><a class="icon-btn home-button" href="index.html" aria-label="返回首页" title="返回首页">⌂</a><button class="icon-btn" id="themeButton" aria-label="切换深色模式">◐</button></div>
     </header>
 
     <section class="progress-panel" aria-label="学习进度">

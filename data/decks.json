@@ -1,0 +1,9 @@
+[
+  {"id":"sejong1-lesson1","type":"korean","tag":"한국어 · 世宗实用韩语 1","title":"第一课 · 国家与职业","description":"1-1、1-2 共 48 张单词与语法卡，教材真人录音优先，缺失用 Yuna 合成语音补齐。","href":"sejong-lesson1.html","action":"开始复习 →"},
+  {"id":"travel-english","type":"english","tag":"ENGLISH","title":"旅行英语 100 句","description":"真实旅行场景、自然朗读、分类复习。","href":"english.html","action":"开始复习 →"},
+  {"id":"travel-korean","type":"korean","tag":"한국어","title":"旅行韩语 100 句","description":"中文提示、罗马音、Yuna 固定录音。","href":"korean.html","action":"开始复习 →"},
+  {"id":"korean-pronunciation","type":"sound","tag":"한글 SOUND","title":"韩语字母与拼音","description":"40 个字母、拼读规则、简短联想与 Yuna 录音。","href":"korean-pronunciation.html","action":"学习发音 →"},
+  {"id":"japanese-pronunciation","type":"sound","tag":"かな SOUND","title":"日语假名与发音","description":"基础假名、字母音与例词录音。","href":"japanese-pronunciation.html","action":"学习发音 →"},
+  {"id":"korean-contrast","type":"sound","tag":"한글 LISTEN","title":"韩语易混辅音辨析","description":"平音、紧音与送气音，对照听、逐词跟读与听音选择。","href":"korean-contrast.html","action":"开始辨音 →"},
+  {"id":"hacks-test","type":"english","tag":"ENGLISH · 测试卡组","title":"真人原声跟读","description":"Hacks 精选 5 段对话，先听原声，再借助情景与语言提示复述。","href":"shadowing.html","action":"开始跟读 →"}
+]

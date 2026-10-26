@@ -23,7 +23,7 @@
       display:block; padding:24px; border:1px solid rgba(24,35,48,.11); border-radius:24px;
       color:inherit; text-decoration:none; background:var(--card); box-shadow:0 16px 45px rgba(26,38,48,.10);
     }
-    .card:active { transform:scale(.985); }
+    .deck-link:active { opacity:.85; }
     .tag { display:inline-block; margin-bottom:20px; padding:6px 10px; border-radius:99px; color:#fff; font-size:12px; font-weight:800; }
     .english .tag { background:var(--en); }
     .korean .tag { background:var(--ko); }
@@ -35,52 +35,20 @@
     .sound .arrow { color:var(--sound); }
     footer { margin-top:22px; color:var(--muted); font-size:12px; text-align:center; }
     @media (min-width:620px) { .grid { grid-template-columns:1fr 1fr; } }
-  </style>
+  .deck-link{display:block;color:inherit;text-decoration:none}.card{padding:24px}.deck-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px}.deck-actions .arrow{margin:0;font-size:14px}.shelve-button{border:1px solid rgba(24,35,48,.13);border-radius:10px;background:transparent;color:var(--muted);font:inherit;font-size:12px;min-height:36px;padding:6px 12px;cursor:pointer}.shelve-button:hover{color:var(--en);border-color:var(--en);background:rgba(40,102,110,.05)}.section-title{font-size:15px;font-weight:750;margin:0 0 14px;display:flex;justify-content:space-between}.count{font-weight:500;color:var(--muted);font-size:13px}.shelf{margin-top:26px;border-top:1px solid rgba(24,35,48,.12);padding-top:18px}.shelf summary{cursor:pointer;color:var(--muted);font-size:14px;padding:10px 0;min-height:44px}.shelf-note{font-size:12px;color:var(--muted);line-height:1.65;margin:0 0 14px}.shelf-list{display:grid;gap:10px}.shelf-item{display:flex;justify-content:space-between;align-items:center;gap:16px;background:var(--card);border:1px solid rgba(24,35,48,.11);border-radius:15px;padding:14px 16px}.shelf-item a{color:var(--text);font-size:14px;text-decoration:none;line-height:1.5}.empty{color:var(--muted);font-size:14px;padding:20px 0;line-height:1.7}.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,18px);opacity:0;pointer-events:none;background:var(--text);color:var(--bg);padding:10px 16px;border-radius:99px;font-size:13px;transition:.25s;z-index:10;max-width:90%;text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--en);outline-offset:4px}@media(prefers-reduced-motion:reduce){*{transition:none!important}}[hidden]{display:none!important}
+</style>
 </head>
 <body>
   <main>
     <div class="eyebrow">Travel Language Cards</div>
     <h1>旅行语言闪卡</h1>
-    <p class="lead">选择旅行句子、发音基础或原声对话模块。支持手机浏览、点击翻面和语音跟读。</p>
-    <div class="grid">
-      <a class="card english" href="english.html">
-        <span class="tag">ENGLISH</span>
-        <h2>旅行英语 100 句</h2>
-        <p>真实旅行场景、自然朗读、分类复习。</p>
-        <span class="arrow">开始复习 →</span>
-      </a>
-      <a class="card korean" href="korean.html">
-        <span class="tag">한국어</span>
-        <h2>旅行韩语 100 句</h2>
-        <p>中文提示、罗马音、Yuna 固定录音。</p>
-        <span class="arrow">开始复习 →</span>
-      </a>
-      <a class="card sound" href="korean-pronunciation.html">
-        <span class="tag">한글 SOUND</span>
-        <h2>韩语字母与拼音</h2>
-        <p>40个字母、拼读规则、简短联想与 Yuna 录音。</p>
-        <span class="arrow">学习发音 →</span>
-      </a>
-      <a class="card sound" href="japanese-pronunciation.html">
-        <span class="tag">かな SOUND</span>
-        <h2>日语假名与发音</h2>
-        <p>46个基础假名、Reed 字母音与 Kyoko 例词录音。</p>
-        <span class="arrow">学习发音 →</span>
-      </a>
-      <a class="card sound" href="korean-contrast.html">
-        <span class="tag">한글 LISTEN</span>
-        <h2>韩语易混辅音辨析</h2>
-        <p>五组平音／紧音／送气音与ㅅ／ㅊ交叉辨析，对照听、逐词跟读与听音选择。</p>
-        <span class="arrow">开始辨音 →</span>
-      </a>
-      <a class="card english" href="shadowing.html">
-        <span class="tag">ENGLISH · 测试卡组</span>
-        <h2>真人原声跟读</h2>
-        <p>Hacks 精选 5 段对话，先听原声，再借助情景与语言提示复述。</p>
-        <span class="arrow">开始跟读 →</span>
-      </a>
-    </div>
-    <footer>内容与学习进度保存在你的设备中</footer>
+    <p class="lead">每次专注少量卡组，暂时不练的先收纳起来。</p>
+    <div class="section-title"><span>正在复习</span><span class="count" id="activeCount"></span></div>
+    <div class="grid" id="activeDecks"></div>
+    <div class="empty" id="emptyActive" hidden>当前没有正在复习的卡组。展开下方“已收纳卡组”，恢复想练习的内容。</div>
+    <details class="shelf" id="shelf"><summary id="shelfSummary">已收纳卡组（0）</summary><p class="shelf-note">暂时不复习的卡组放在这里，内容和学习进度都会保留，随时可以恢复。</p><div class="shelf-list" id="archivedDecks"></div><p class="empty" id="emptyShelf">还没有收纳卡组。</p></details>
+    <noscript><p>请启用 JavaScript 管理卡组。<a href="sejong-lesson1.html">第一课</a> · <a href="english.html">旅行英语</a> · <a href="korean.html">旅行韩语</a></p></noscript>
+    <footer>收纳状态与学习进度保存在当前浏览器，不跨设备同步。</footer>
   </main>
-</body>
+<div class="toast" id="toast" role="status" aria-live="polite"></div><script src="assets/deck-library.js"></script></body>
 </html>

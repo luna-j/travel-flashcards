@@ -1,0 +1,151 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title></title><style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f3ee;
+      --surface: #fffdf8;
+      --surface-2: #ebe8df;
+      --text: #182330;
+      --muted: #68717b;
+      --accent: #28666e;
+      --accent-2: #e5a641;
+      --line: rgba(24, 35, 48, .12);
+      --shadow: 0 20px 60px rgba(26, 38, 48, .14);
+      --good: #237a57;
+      --maybe: #b47615;
+      --again: #b64d4d;
+    }
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #11181d;
+      --surface: #192228;
+      --surface-2: #243038;
+      --text: #f2f4ef;
+      --muted: #a9b3b8;
+      --accent: #6fc2c8;
+      --accent-2: #e7b765;
+      --line: rgba(255, 255, 255, .12);
+      --shadow: 0 20px 60px rgba(0, 0, 0, .32);
+      --good: #67c998;
+      --maybe: #e2af58;
+      --again: #e17c7c;
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-tap-highlight-color: transparent; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100dvh;
+      background:
+        radial-gradient(circle at 85% -10%, rgba(229, 166, 65, .20), transparent 34%),
+        radial-gradient(circle at -10% 70%, rgba(40, 102, 110, .15), transparent 30%),
+        var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      overflow-x: hidden;
+    }
+    button { font: inherit; color: inherit; }
+    .app {
+      width: min(100%, 760px);
+      margin: 0 auto;
+      padding: max(18px, env(safe-area-inset-top)) 16px max(28px, env(safe-area-inset-bottom));
+    }
+    .topbar { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+    .eyebrow { color: var(--accent); font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { margin: 5px 0 4px; font-size: clamp(25px, 7vw, 38px); line-height: 1.08; letter-spacing: -.03em; }
+    .subtitle { margin: 0; color: var(--muted); font-size: 14px; }
+    .icon-btn {
+      width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 50%;
+      background: color-mix(in srgb, var(--surface) 90%, transparent); cursor: pointer;
+      box-shadow: 0 8px 24px rgba(0,0,0,.06);
+    }
+    .progress-panel {
+      margin: 20px 0 14px; padding: 14px 15px; background: color-mix(in srgb, var(--surface) 92%, transparent);
+      border: 1px solid var(--line); border-radius: 18px; backdrop-filter: blur(12px);
+    }
+    .progress-head { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--muted); }
+    .progress-head strong { color: var(--text); font-size: 14px; }
+    .track { height: 8px; margin-top: 10px; background: var(--surface-2); border-radius: 99px; overflow: hidden; }
+    .fill { height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width .3s ease; }
+    .chips { display: flex; gap: 8px; margin: 0 -16px 14px; padding: 2px 16px 8px; overflow-x: auto; scrollbar-width: none; }
+    .chips::-webkit-scrollbar { display: none; }
+    .chip {
+      flex: 0 0 auto; border: 1px solid var(--line); border-radius: 99px; padding: 9px 13px;
+      background: var(--surface); color: var(--muted); font-size: 13px; cursor: pointer;
+    }
+    .chip.active { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 700; }
+    .card-meta { display: flex; justify-content: space-between; align-items: center; margin: 3px 3px 9px; color: var(--muted); font-size: 13px; }
+    .status-pill { padding: 4px 9px; border-radius: 99px; background: var(--surface-2); }
+    .stage { perspective: 1200px; }
+    .flashcard {
+      position: relative; width: 100%; height: clamp(350px, 55vh, 470px); padding: 0; border: 0;
+      background: transparent; cursor: pointer; border-radius: 28px; touch-action: pan-y;
+    }
+    .card-inner { position: absolute; inset: 0; transition: transform .5s cubic-bezier(.2,.7,.2,1); transform-style: preserve-3d; }
+    .flashcard.flipped .card-inner { transform: rotateY(180deg); }
+    .face {
+      position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between;
+      padding: 25px 24px 22px; border: 1px solid var(--line); border-radius: 28px;
+      background: var(--surface); box-shadow: var(--shadow); backface-visibility: hidden; -webkit-backface-visibility: hidden;
+      overflow: auto;
+    }
+    .front::before, .back::before {
+      content: ""; position: absolute; width: 170px; height: 170px; border-radius: 50%;
+      right: -65px; top: -70px; background: color-mix(in srgb, var(--accent-2) 20%, transparent);
+    }
+    .back { transform: rotateY(180deg); background: linear-gradient(145deg, var(--surface), color-mix(in srgb, var(--accent) 8%, var(--surface))); }
+    .face-label { position: relative; color: var(--accent); font-size: 12px; font-weight: 800; letter-spacing: .12em; }
+    .prompt { position: relative; margin: auto 0; font-size: clamp(27px, 7vw, 42px); line-height: 1.34; font-weight: 760; letter-spacing: -.02em; }
+    .answer { position: relative; margin: auto 0 12px; font-size: clamp(26px, 7vw, 42px); line-height: 1.28; font-weight: 760; letter-spacing: -.02em; color: var(--accent); }
+    .notes { color: var(--text); font-size: 15px; line-height: 1.55; }
+    .notes p { margin: 7px 0 0; }
+    .notes strong { color: var(--accent-2); }
+    .tap-hint { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 12px; }
+    .speech-row { display: flex; gap: 8px; margin-top: 16px; }
+    .speech-btn { border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; background: var(--surface); cursor: pointer; }
+    .voice-panel {
+      display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center;
+      margin-top: 12px; padding: 11px 12px; border: 1px solid var(--line); border-radius: 16px;
+      background: color-mix(in srgb, var(--surface) 92%, transparent);
+    }
+    .voice-copy { min-width: 0; }
+    .voice-copy label { display: block; margin-bottom: 4px; font-size: 12px; font-weight: 800; color: var(--accent); }
+    .voice-select {
+      width: 100%; min-height: 34px; border: 0; outline: 0; padding: 0; background: transparent;
+      color: var(--text); font: inherit; font-size: 13px; text-overflow: ellipsis;
+    }
+    .preview-btn {
+      min-height: 40px; border: 1px solid var(--line); border-radius: 12px; padding: 0 13px;
+      background: var(--surface-2); color: var(--text); cursor: pointer; font-weight: 750;
+    }
+    .nav-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; margin-top: 14px; }
+    .nav-btn { min-height: 48px; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); cursor: pointer; font-weight: 700; }
+    .random-btn { width: 48px; height: 48px; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); cursor: pointer; }
+    .random-btn.active { color: #fff; background: var(--accent); border-color: var(--accent); }
+    .ratings { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; opacity: .35; pointer-events: none; transition: opacity .2s ease; }
+    .ratings.ready { opacity: 1; pointer-events: auto; }
+    .rate-btn { min-height: 49px; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); cursor: pointer; font-weight: 750; }
+    .rate-btn[data-value="again"] { color: var(--again); }
+    .rate-btn[data-value="maybe"] { color: var(--maybe); }
+    .rate-btn[data-value="known"] { color: var(--good); }
+    .footer-actions { display: flex; justify-content: center; gap: 14px; margin-top: 18px; }
+    .text-btn { border: 0; background: transparent; color: var(--muted); padding: 8px; cursor: pointer; font-size: 13px; }
+    .toast {
+      position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); transform: translate(-50%, 18px);
+      opacity: 0; pointer-events: none; background: var(--text); color: var(--bg); padding: 10px 16px;
+      border-radius: 99px; font-size: 13px; transition: .25s ease; z-index: 10;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    @media (max-height: 690px) {
+      .flashcard { height: 330px; }
+      .progress-panel { margin-top: 12px; }
+      .face { padding: 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  .header-actions{display:flex;gap:8px;align-items:center}.home-button{color:var(--text);display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;text-decoration:none;font-size:22px;line-height:1}.home-button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.shell{position:relative;perspective:1200px;height:480px;cursor:pointer;border-radius:28px;touch-action:pan-y}.shell.flipped .card-inner{transform:rotateY(180deg)}.shell .face{padding:25px 24px 110px;text-align:start}.content{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;width:100%;scrollbar-width:thin}.listen{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}.big-play{border:0;border-radius:50%;width:94px;height:94px;background:var(--accent);color:var(--bg);font-size:30px;margin:24px 0;cursor:pointer}.quiet{font-size:13px;color:var(--muted)}.label{font-size:12px;color:var(--accent);font-weight:800}.brief{font-size:15px;line-height:1.7;margin:6px 0 16px}.hint{padding:12px 0}.hint+.hint{border-top:1px solid var(--line)}.expression{font-size:19px;line-height:1.45;font-weight:650}.meaning{font-size:13px;color:var(--muted);margin-top:6px}.tools{position:absolute;bottom:50px;inset-inline:24px;display:flex;justify-content:center;gap:18px;z-index:2}.tools button{background:none;border:0;padding:9px;color:var(--accent);font:inherit;font-size:13px;cursor:pointer}.face-footer{position:absolute;bottom:16px;inset-inline:24px;display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--muted);font-size:12px}.details-button{padding:8px 13px;border:1px solid color-mix(in srgb,var(--accent) 55%,var(--line));border-radius:11px;background:color-mix(in srgb,var(--accent) 10%,var(--surface));color:var(--accent);font:inherit;font-size:12px;font-weight:750;cursor:pointer}.status-line{position:absolute;bottom:85px;inset-inline:24px;text-align:center;pointer-events:none;font-size:11px;color:var(--muted)}.header-actions{display:flex;gap:8px}.home-button{display:grid;place-items:center;color:var(--text);text-decoration:none;flex-shrink:0;font-size:22px}.note{font-size:11px;line-height:1.6;color:var(--muted);margin:16px 0}.turn{padding:14px 0;border-bottom:1px solid var(--line)}.speaker{color:var(--accent);font-size:12px;margin-bottom:5px}.script{font-size:17px;line-height:1.7;white-space:pre-line}.translation{font-size:14px;line-height:1.7;color:var(--muted);margin-top:8px}.sheet{border:1px solid var(--line);border-radius:24px;background:var(--surface);color:var(--text);width:min(580px,calc(100% - 24px));max-height:82dvh;padding:0}.sheet::backdrop{background:rgba(0,0,0,.55)}.sheet-head{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;background:var(--surface);padding:16px 20px;border-bottom:1px solid var(--line);z-index:1}.sheet-head h2{font-size:18px;margin:0}.sheet-content{padding:16px 20px;line-height:1.7}.sheet-content .tools{position:static;justify-content:flex-start;flex-wrap:wrap}.extra{font-size:14px;color:var(--muted);white-space:pre-line}.small-actions{display:flex;justify-content:center;gap:12px;margin:18px 0}.small-actions button{font:inherit;border:0;background:none;color:var(--muted);font-size:12px;cursor:pointer}.shell:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}[hidden]{display:none!important}@media(max-height:690px){.shell{height:400px}}[dir=rtl] .eyebrow{letter-spacing:normal}
+.topbar{position:relative;display:block}.header-actions{position:absolute;top:0;right:0}.eyebrow{color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.03em;text-transform:none;margin:0 0 8px;min-height:44px;display:flex;align-items:center;padding-inline-end:110px;line-height:1.35}.topbar>div:first-child{min-width:0}.topbar h1{font-size:clamp(25px,6.6vw,38px);overflow-wrap:anywhere}
+</style></head><body><main class="app"><header class="topbar"><div><div class="eyebrow" id="languagePair"></div><h1 id="title"></h1><p class="subtitle" id="subtitle"></p></div><div class="header-actions"><a id="home" class="icon-btn home-button">⌂</a><button id="theme" class="icon-btn">◐</button></div></header><div class="card-meta" style="margin-top:24px"><span id="position"></span><span class="status-pill" id="ratingLabel"></span></div><section class="shell" id="card" role="button" tabindex="0" aria-pressed="false"><div class="card-inner"><div class="face front"><div class="content listen"><div class="quiet" data-ui="listen"></div><button class="big-play" id="play">▶</button><div class="quiet" id="duration"></div></div><div class="face-footer"><span></span><span data-ui="front_hint"></span></div></div><div class="face back" inert><div class="content" id="backContent"><div class="label" data-ui="scene"></div><p class="brief" id="scene"></p><div class="label" data-ui="purpose"></div><p class="brief" id="purpose"></p><div id="hints"></div></div><div class="face-footer"><span data-ui="back_hint"></span><button class="details-button" id="detailsButton" data-ui="details"></button></div></div></div><div class="tools"><button id="replay" data-ui="replay"></button><button id="slow" data-ui="slow" aria-pressed="false"></button></div><div class="status-line" id="audioStatus" aria-live="polite"></div></section><div class="nav-row"><button class="nav-btn" id="prev" data-ui="previous"></button><button class="random-btn" id="shuffle" aria-pressed="false">⌘</button><button class="nav-btn" id="next" data-ui="next"></button></div><div class="ratings" id="ratings"><button class="rate-btn" data-value="again" data-ui="need_listen"></button><button class="rate-btn" data-value="maybe" data-ui="with_hints"></button><button class="rate-btn" data-value="known" data-ui="independent"></button></div><p class="note" id="draftNotice"></p><div class="small-actions"><button id="export" data-ui="export_progress"></button><button id="import" data-ui="import_progress"></button></div><input id="progressFile" type="file" accept="application/json,.json" hidden><audio id="audio" preload="metadata"></audio></main><dialog class="sheet" id="details" aria-labelledby="detailsTitle"><div class="sheet-head"><h2 id="detailsTitle" data-ui="details"></h2><button class="icon-btn" id="close">×</button></div><div class="sheet-content"><div class="tools"><button id="detailReplay" data-ui="replay"></button><button id="translationToggle" aria-pressed="false" data-ui="translation_show"></button></div><p class="note" id="scriptNotice" hidden></p><div id="turns"></div><p class="extra" id="notes"></p><p class="note" id="source"></p></div></dialog><div class="toast" id="toast" role="status" aria-live="polite"></div><script>
+const deck={"schema_version": 1, "id": "demo-nsq156-en-through-zh", "title": "闲聊 · No Stupid Questions", "subtitle": "英语 / English · 3 张原声卡", "stage": "sample", "target_lang": "en", "target_dir": "ltr", "explanation_lang": "zh-CN", "dir": "ltr", "home_href": "index.html", "profile": {"level": "Sample; no formal learner assessment", "goal": "用简短追问、补充愿望和积极回应延续聊天", "tts_allowed": false, "batch_size": 3}, "sample_review": {"status": "pending", "response": "", "scope": "Public demonstration; private feedback is not included"}, "ui": {"home": "返回首页", "theme": "切换主题", "listen": "先听声音", "play": "播放", "pause": "暂停", "replay": "重听", "slow": "慢速", "front_hint": "轻点卡片翻面", "back_hint": "看提示，再用自己的话说", "scene": "情景", "purpose": "对话目的", "details": "台词与解析", "close": "关闭", "translation_show": "显示中文", "translation_hide": "隐藏中文", "previous": "上一张", "next": "下一张", "shuffle_on": "已开启乱序", "shuffle_off": "已关闭乱序", "need_listen": "再听听", "with_hints": "看提示能说", "independent": "可以独立说", "saved": "已保存", "playing": "播放中…", "play_error": "音频暂时无法播放", "missing": "暂无音频", "draft": "样张：已对照官网文字稿与本地转写，逐字听感和切点仍待复核。", "original": "播客原声", "synth": "合成语音", "library_title": "原声案例", "open_deck": "打开卡组", "source": "来源", "notes": "补充", "export_progress": "导出进度", "import_progress": "导入进度", "import_error": "进度导入失败", "progress_loaded": "进度已导入"}, "cards": [{"id": "nsq156-plan-478340-486380", "heading": "确认安排", "scene": "两个人聊理想的一天：爬山之后，再去海边读书。", "purpose": "复述对方的安排，用一个小问题把话接下去。", "hints": [{"expression": "after you get back from…", "meaning": "从……回来以后；用来确认先后安排。"}, {"expression": "That’s probably…", "meaning": "大概会是……；设想时留一点余地。"}], "turns": [{"speaker": "Angela", "text": "Reading the book happens after you get back from the really hard hike?", "translation": "读书是在那场很累的徒步回来以后，对吧？"}, {"speaker": "Mike", "text": "Yeah. That’s probably sitting on the back deck overlooking the beach or sitting on the beach itself.", "translation": "对。大概会坐在后面的露台上望着海滩，或者就坐在海滩上。"}], "notes": "这里不是连续发问，而是先接住刚才的信息，再确认一个小细节。That’s probably…承接的是“读书这件事大概会在哪里发生”。练习时可把徒步和海滩换成自己的安排。", "audio": "audio/podcast/plan.mp3", "audio_kind": "original", "source": {"id": "nsq-156-official-mp3", "title": "No Stupid Questions #156 · How Do You Connect With Someone You Just Met?", "start": 478.34, "end": 486.38, "script_url": "https://freakonomics.com/podcast/how-do-you-connect-with-someone-you-just-met/"}, "verification": {"decode": "pass", "transcript": "unverified", "boundaries": "unverified", "listening": "unverified"}}, {"id": "nsq156-wish-489080-496150", "heading": "再加一个小愿望", "scene": "聊理想的一天时，一方顺便提到：如果再有点好吃的就更好了。", "purpose": "轻松补充自己的偏好，也接纳对方的愿望。", "hints": [{"expression": "It wouldn’t hurt to…", "meaning": "要是再……就更好了；轻描淡写地提出想法。"}, {"expression": "You get to pick…", "meaning": "你可以自己选……。"}], "turns": [{"speaker": "Mike", "text": "I’m not like a foodie foodie, but it wouldn’t hurt to have great food in there as well.", "translation": "我倒不是那种特别讲究吃的人，不过如果还有美食就更好了。"}, {"speaker": "Angela", "text": "It’s a perfect day. I think you get to pick that there’s perfect food.", "translation": "这可是理想的一天，我觉得你当然可以把完美的食物也选上。"}], "notes": "foodie foodie把词重复一次，强调“真正特别热衷美食的人”。It wouldn’t hurt to…在这段里用来轻松补充愿望。注意接话时沿用对方“理想的一天”的设定，让小愿望顺势成立。", "audio": "audio/podcast/wish.mp3", "audio_kind": "original", "source": {"id": "nsq-156-official-mp3", "title": "No Stupid Questions #156 · How Do You Connect With Someone You Just Met?", "start": 489.08, "end": 496.15, "script_url": "https://freakonomics.com/podcast/how-do-you-connect-with-someone-you-just-met/"}, "verification": {"decode": "pass", "transcript": "unverified", "boundaries": "unverified", "listening": "unverified"}}, {"id": "nsq156-detail-544340-550900", "heading": "热情接住细节", "scene": "对方把理想的一天讲得很具体，你表示欣赏，也拿自己作个对比。", "purpose": "用简短而积极的反馈，让对方愿意继续讲。", "hints": [{"expression": "I love it.", "meaning": "我喜欢！用来表达对这个想法的欣赏。"}, {"expression": "I’m going for it!", "meaning": "这里是“那我就放开了细讲啦”。"}], "turns": [{"speaker": "Mike", "text": "Wow, this is an immense level of detail. I love it.", "translation": "哇，这细节也太丰富了。我喜欢！"}, {"speaker": "Angela", "text": "Oh yeah, I’m, I’m going for it!", "translation": "对啊，那我就放开讲啦！"}, {"speaker": "Mike", "text": "Mine’s like so general.", "translation": "我刚才讲得就好笼统。"}], "notes": "这段练的是反馈的节奏，不必把immense当成必背词。可以保留一句欣赏，再加一句自己的感受。详情脚本保留了自动字幕中出现的I’m重复；本地ASR与官网稿对此略有简化，仍待逐字听辨。", "audio": "audio/podcast/detail.mp3", "audio_kind": "original", "source": {"id": "nsq-156-official-mp3", "title": "No Stupid Questions #156 · How Do You Connect With Someone You Just Met?", "start": 544.34, "end": 550.9, "script_url": "https://freakonomics.com/podcast/how-do-you-connect-with-someone-you-just-met/"}, "verification": {"decode": "pass", "transcript": "unverified", "boundaries": "unverified", "listening": "unverified"}}], "header": {"languages": "英语 / 中文", "source": "No Stupid Questions", "meta": "{count} 张卡片 · 播客原声"}, "draft": true, "missing_ids": []};const ui=deck.ui;const $=s=>document.querySelector(s);const audio=$('#audio');let index=0,queue=deck.cards.map((_,i)=>i),cursor=0,random=false,back=false,slow=false,translate=false,toastTimer,advanceTimer;const key='scene-audio-v1:'+deck.id;let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}')}catch{}const ratings=saved.ratings&&typeof saved.ratings==='object'?saved.ratings:{};let theme=['dark','light'].includes(saved.theme)?saved.theme:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.lang=deck.explanation_lang;document.documentElement.dir=deck.dir;document.title=deck.title;document.querySelectorAll('[data-ui]').forEach(e=>e.textContent=ui[e.dataset.ui]);$('#languagePair').textContent=deck.header?.languages||`${deck.target_lang} / ${deck.explanation_lang}`;$('#title').textContent=deck.header?.source||deck.title;$('#subtitle').textContent=(deck.header?.meta||deck.subtitle||'').replace('{count}',deck.cards.length);$('#scriptNotice').textContent=deck.script_notice||'';$('#scriptNotice').hidden=!deck.script_notice;$('#home').href=deck.home_href||'library.html';$('#home').setAttribute('aria-label',ui.home);$('#home').title=ui.home;$('#theme').setAttribute('aria-label',ui.theme);$('#close').setAttribute('aria-label',ui.close);$('#card').setAttribute('aria-label',ui.front_hint);$('#draftNotice').textContent=deck.draft?ui.draft:'';const states={again:ui.need_listen,maybe:ui.with_hints,known:ui.independent};function save(){try{localStorage.setItem(key,JSON.stringify({theme,ratings}))}catch{}}function toast(t){$('#toast').textContent=t;$('#toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),1500)}function card(){return deck.cards[index]}function flip(b){back=b;$('#card').classList.toggle('flipped',b);$('.front').inert=b;$('.back').inert=!b;$('#ratings').classList.toggle('ready',b);$('#ratings').querySelectorAll('button').forEach(x=>x.disabled=!b);$('#card').setAttribute('aria-pressed',b)}function node(tag,cls,text,lang,dir){const el=document.createElement(tag);if(cls)el.className=cls;el.textContent=text;if(lang)el.lang=lang;if(dir)el.dir=dir;return el}function render(){clearTimeout(advanceTimer);audio.pause();if($('#details').open)$('#details').close();index=queue[cursor];const c=card();flip(false);translate=false;$('#backContent').scrollTop=0;$('#position').textContent=`${cursor+1} / ${queue.length}`;$('#ratingLabel').textContent=states[ratings[c.id]]||'';$('#scene').textContent=c.scene;$('#purpose').textContent=c.purpose;$('#hints').replaceChildren();for(const h of c.hints){const el=node('div','hint','');el.append(node('div','expression',h.expression,deck.target_lang,deck.target_dir),node('div','meaning',h.meaning,deck.explanation_lang,deck.dir));$('#hints').append(el)}$('#turns').replaceChildren();for(const t of c.turns){const el=node('div','turn','');el.append(node('div','speaker',t.speaker),node('div','script',t.text,deck.target_lang,deck.target_dir));if(t.translation){const tr=node('div','translation',t.translation,deck.explanation_lang,deck.dir);tr.hidden=true;el.append(tr)}$('#turns').append(el)}$('#notes').textContent=[c.register,c.notes].filter(Boolean).join('\n\n');const s=c.source||{};$('#source').textContent=ui.source+': '+[s.title,s.start!=null?`${s.start}–${s.end}`:''].filter(Boolean).join(' · ');$('#translationToggle').textContent=ui.translation_show;$('#translationToggle').setAttribute('aria-pressed','false');$('#duration').textContent='';$('#play').textContent='▶';$('#play').setAttribute('aria-label',ui.play);const missing=(deck.missing_ids||[]).includes(c.id);audio.removeAttribute('src');if(!missing)audio.src=c.audio;for(const id of ['play','replay','slow','detailReplay'])$('#'+id).disabled=missing;$('#audioStatus').textContent=missing?ui.missing:(c.audio_kind==='synth'?ui.synth:ui.original);document.documentElement.dataset.theme=theme;save()}function move(d){cursor=(cursor+d+queue.length)%queue.length;render()}async function play(restart=false){if(restart)audio.currentTime=0;audio.playbackRate=slow?.85:1;audio.preservesPitch=true;try{await audio.play()}catch{$('#audioStatus').textContent=ui.play_error}}$('#play').onclick=()=>audio.paused?play():audio.pause();$('#replay').onclick=()=>play(true);$('#detailReplay').onclick=()=>play(true);audio.onloadedmetadata=()=>{const n=Math.round(audio.duration);$('#duration').textContent=Number.isFinite(n)?Math.floor(n/60)+':'+String(n%60).padStart(2,'0'):''};audio.onplay=()=>{$('#play').textContent='Ⅱ';$('#play').setAttribute('aria-label',ui.pause);$('#audioStatus').textContent=ui.playing};audio.onpause=()=>{$('#play').textContent='▶';$('#play').setAttribute('aria-label',ui.play)};audio.onerror=()=>{if(audio.getAttribute('src'))$('#audioStatus').textContent=ui.play_error};audio.onended=()=>$('#audioStatus').textContent=card().audio_kind==='synth'?ui.synth:ui.original;$('#slow').onclick=()=>{slow=!slow;audio.playbackRate=slow?.85:1;audio.preservesPitch=true;$('#slow').setAttribute('aria-pressed',slow);$('#slow').textContent=ui.slow+(slow?' · 0.85×':'')};let x=0,y=0,skip=false;$('#card').onclick=e=>{if(skip){skip=false;return}if(e.target.closest('button,a,input')||getSelection().toString())return;flip(!back)};$('#card').onkeydown=e=>{if(e.target===e.currentTarget&&['Enter',' '].includes(e.key)){e.preventDefault();flip(!back)}};$('#card').onpointerdown=e=>{x=e.clientX;y=e.clientY};$('#card').onpointerup=e=>{if(e.target.closest('button,a,input'))return;const dx=e.clientX-x,dy=e.clientY-y;if(Math.abs(dx)>65&&Math.abs(dx)>Math.abs(dy)){skip=true;setTimeout(()=>skip=false,350);move(dx<0?1:-1)}};$('#prev').onclick=()=>move(-1);$('#next').onclick=()=>move(1);$('#shuffle').onclick=()=>{clearTimeout(advanceTimer);random=!random;if(random){const rest=deck.cards.map((_,i)=>i).filter(i=>i!==index);for(let j=rest.length-1;j>0;j--){const k=Math.floor(Math.random()*(j+1));[rest[j],rest[k]]=[rest[k],rest[j]]}queue=[index,...rest];cursor=0}else{queue=deck.cards.map((_,i)=>i);cursor=index}$('#shuffle').classList.toggle('active',random);$('#shuffle').setAttribute('aria-pressed',random);$('#shuffle').setAttribute('aria-label',random?ui.shuffle_off:ui.shuffle_on);toast(random?ui.shuffle_on:ui.shuffle_off)};$('#shuffle').setAttribute('aria-label',ui.shuffle_on);$('#ratings').onclick=e=>{const b=e.target.closest('[data-value]');if(b&&back){ratings[card().id]=b.dataset.value;save();toast(ui.saved);clearTimeout(advanceTimer);advanceTimer=setTimeout(()=>move(1),160)}};$('#theme').onclick=()=>{theme=theme==='dark'?'light':'dark';document.documentElement.dataset.theme=theme;save()};$('#detailsButton').onclick=()=>{audio.pause();clearTimeout(advanceTimer);$('#details').showModal()};$('#close').onclick=()=>$('#details').close();$('#details').addEventListener('close',()=>{audio.pause();$('#detailsButton').focus()});$('#translationToggle').onclick=()=>{translate=!translate;document.querySelectorAll('.translation').forEach(e=>e.hidden=!translate);$('#translationToggle').textContent=translate?ui.translation_hide:ui.translation_show;$('#translationToggle').setAttribute('aria-pressed',translate)};$('#export').onclick=()=>{const blob=new Blob([JSON.stringify({schema_version:1,deck_id:deck.id,ratings},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=deck.id+'-progress.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};$('#import').onclick=()=>$('#progressFile').click();$('#progressFile').onchange=async e=>{try{const f=e.target.files[0];if(!f||f.size>1000000)throw Error();const p=JSON.parse(await f.text());if(p.deck_id!==deck.id||!p.ratings||typeof p.ratings!=='object')throw Error();for(const [id,value]of Object.entries(p.ratings))if(deck.cards.some(c=>c.id===id)&&Object.hasOwn(states,value))ratings[id]=value;save();render();toast(ui.progress_loaded)}catch{toast(ui.import_error)}e.target.value=''};render();
+</script></body></html>

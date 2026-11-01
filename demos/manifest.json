@@ -1,0 +1,54 @@
+[
+  {
+    "id": "hacks",
+    "href": "hacks.html",
+    "languages": "英语 / 中文",
+    "source": "绝望写手 · Hacks",
+    "meta": "3 张卡片 · 剧集原声",
+    "description": "影视对白 · 提议与回应",
+    "count": 3,
+    "content": "data/hacks/content.md",
+    "sources": "data/hacks/sources.md",
+    "download": "downloads/hacks.zip",
+    "anki": "downloads/hacks-anki.zip"
+  },
+  {
+    "id": "podcast",
+    "href": "podcast.html",
+    "languages": "英语 / 中文",
+    "source": "No Stupid Questions",
+    "meta": "3 张卡片 · 播客原声",
+    "description": "播客交流 · 让聊天继续",
+    "count": 3,
+    "content": "data/podcast/content.md",
+    "sources": "data/podcast/sources.md",
+    "download": "downloads/podcast.zip",
+    "anki": "downloads/podcast-anki.zip"
+  },
+  {
+    "id": "japanese",
+    "href": "japanese.html",
+    "languages": "日语 / 中文",
+    "source": "我们的箱根驿传 · 第2集",
+    "meta": "3 张卡片 · 剧集原声",
+    "description": "日剧对白 · 介绍、干劲与鼓励",
+    "count": 3,
+    "content": "data/japanese/content.md",
+    "sources": "data/japanese/sources.md",
+    "download": "downloads/japanese.zip",
+    "anki": "downloads/japanese-anki.zip"
+  },
+  {
+    "id": "shanghainese",
+    "href": "shanghainese.html",
+    "languages": "沪语 / English",
+    "source": "爱情神话 · B for Busy",
+    "meta": "3 cards · Film audio",
+    "description": "用英语学沪语 · 生活与机智回应",
+    "count": 3,
+    "content": "data/shanghainese/content.md",
+    "sources": "data/shanghainese/sources.md",
+    "download": "downloads/shanghainese.zip",
+    "anki": "downloads/shanghainese-anki.zip"
+  }
+]

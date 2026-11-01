@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "id": "demo-nsq156-en-through-zh",
+  "title": "闲聊 · No Stupid Questions",
+  "subtitle": "英语 / English · 3 张原声卡",
+  "stage": "sample",
+  "target_lang": "en",
+  "target_dir": "ltr",
+  "explanation_lang": "zh-CN",
+  "dir": "ltr",
+  "home_href": "index.html",
+  "profile": {
+    "level": "Sample; no formal learner assessment",
+    "goal": "用简短追问、补充愿望和积极回应延续聊天",
+    "tts_allowed": false,
+    "batch_size": 3
+  },
+  "sample_review": {
+    "status": "pending",
+    "response": "",
+    "scope": "Public demonstration; private feedback is not included"
+  },
+  "ui": {
+    "home": "返回首页",
+    "theme": "切换主题",
+    "listen": "先听声音",
+    "play": "播放",
+    "pause": "暂停",
+    "replay": "重听",
+    "slow": "慢速",
+    "front_hint": "轻点卡片翻面",
+    "back_hint": "看提示，再用自己的话说",
+    "scene": "情景",
+    "purpose": "对话目的",
+    "details": "台词与解析",
+    "close": "关闭",
+    "translation_show": "显示中文",
+    "translation_hide": "隐藏中文",
+    "previous": "上一张",
+    "next": "下一张",
+    "shuffle_on": "已开启乱序",
+    "shuffle_off": "已关闭乱序",
+    "need_listen": "再听听",
+    "with_hints": "看提示能说",
+    "independent": "可以独立说",
+    "saved": "已保存",
+    "playing": "播放中…",
+    "play_error": "音频暂时无法播放",
+    "missing": "暂无音频",
+    "draft": "样张：已对照官网文字稿与本地转写，逐字听感和切点仍待复核。",
+    "original": "播客原声",
+    "synth": "合成语音",
+    "library_title": "原声案例",
+    "open_deck": "打开卡组",
+    "source": "来源",
+    "notes": "补充",
+    "export_progress": "导出进度",
+    "import_progress": "导入进度",
+    "import_error": "进度导入失败",
+    "progress_loaded": "进度已导入"
+  },
+  "cards": [
+    {
+      "id": "nsq156-plan-478340-486380",
+      "heading": "确认安排",
+      "scene": "两个人聊理想的一天：爬山之后，再去海边读书。",
+      "purpose": "复述对方的安排，用一个小问题把话接下去。",
+      "hints": [
+        {
+          "expression": "after you get back from…",
+          "meaning": "从……回来以后；用来确认先后安排。"
+        },
+        {
+          "expression": "That’s probably…",
+          "meaning": "大概会是……；设想时留一点余地。"
+        }
+      ],
+      "turns": [
+        {
+          "speaker": "Angela",
+          "text": "Reading the book happens after you get back from the really hard hike?",
+          "translation": "读书是在那场很累的徒步回来以后，对吧？"
+        },
+        {
+          "speaker": "Mike",
+          "text": "Yeah. That’s probably sitting on the back deck overlooking the beach or sitting on the beach itself.",
+          "translation": "对。大概会坐在后面的露台上望着海滩，或者就坐在海滩上。"
+        }
+      ],
+      "notes": "这里不是连续发问，而是先接住刚才的信息，再确认一个小细节。That’s probably…承接的是“读书这件事大概会在哪里发生”。练习时可把徒步和海滩换成自己的安排。",
+      "audio": "audio/podcast/plan.mp3",
+      "audio_kind": "original",
+      "source": {
+        "id": "nsq-156-official-mp3",
+        "title": "No Stupid Questions #156 · How Do You Connect With Someone You Just Met?",
+        "start": 478.34,
+        "end": 486.38,
+        "script_url": "https://freakonomics.com/podcast/how-do-you-connect-with-someone-you-just-met/"
+      },
+      "verification": {
+        "decode": "pass",
+        "transcript": "unverified",
+        "boundaries": "unverified",
+        "listening": "unverified"
+      }
+    },
+    {
+      "id": "nsq156-wish-489080-496150",
+      "heading": "再加一个小愿望",
+      "scene": "聊理想的一天时，一方顺便提到：如果再有点好吃的就更好了。",
+      "purpose": "轻松补充自己的偏好，也接纳对方的愿望。",
+      "hints": [
+        {
+          "expression": "It wouldn’t hurt to…",
+          "meaning": "要是再……就更好了；轻描淡写地提出想法。"
+        },
+        {
+          "expression": "You get to pick…",
+          "meaning": "你可以自己选……。"
+        }
+      ],
+      "turns": [
+        {
+          "speaker": "Mike",
+          "text": "I’m not like a foodie foodie, but it wouldn’t hurt to have great food in there as well.",
+          "translation": "我倒不是那种特别讲究吃的人，不过如果还有美食就更好了。"
+        },
+        {
+          "speaker": "Angela",
+          "text": "It’s a perfect day. I think you get to pick that there’s perfect food.",
+          "translation": "这可是理想的一天，我觉得你当然可以把完美的食物也选上。"
+        }
+      ],
+      "notes": "foodie foodie把词重复一次，强调“真正特别热衷美食的人”。It wouldn’t hurt to…在这段里用来轻松补充愿望。注意接话时沿用对方“理想的一天”的设定，让小愿望顺势成立。",
+      "audio": "audio/podcast/wish.mp3",
+      "audio_kind": "original",
+      "source": {
+        "id": "nsq-156-official-mp3",
+        "title": "No Stupid Questions #156 · How Do You Connect With Someone You Just Met?",
+        "start": 489.08,
+        "end": 496.15,
+        "script_url": "https://freakonomics.com/podcast/how-do-you-connect-with-someone-you-just-met/"
+      },
+      "verification": {
+        "decode": "pass",
+        "transcript": "unverified",
+        "boundaries": "unverified",
+        "listening": "unverified"
+      }
+    },
+    {
+      "id": "nsq156-detail-544340-550900",
+      "heading": "热情接住细节",
+      "scene": "对方把理想的一天讲得很具体，你表示欣赏，也拿自己作个对比。",
+      "purpose": "用简短而积极的反馈，让对方愿意继续讲。",
+      "hints": [
+        {
+          "expression": "I love it.",
+          "meaning": "我喜欢！用来表达对这个想法的欣赏。"
+        },
+        {
+          "expression": "I’m going for it!",
+          "meaning": "这里是“那我就放开了细讲啦”。"
+        }
+      ],
+      "turns": [
+        {
+          "speaker": "Mike",
+          "text": "Wow, this is an immense level of detail. I love it.",
+          "translation": "哇，这细节也太丰富了。我喜欢！"
+        },
+        {
+          "speaker": "Angela",
+          "text": "Oh yeah, I’m, I’m going for it!",
+          "translation": "对啊，那我就放开讲啦！"
+        },
+        {
+          "speaker": "Mike",
+          "text": "Mine’s like so general.",
+          "translation": "我刚才讲得就好笼统。"
+        }
+      ],
+      "notes": "这段练的是反馈的节奏，不必把immense当成必背词。可以保留一句欣赏，再加一句自己的感受。详情脚本保留了自动字幕中出现的I’m重复；本地ASR与官网稿对此略有简化，仍待逐字听辨。",
+      "audio": "audio/podcast/detail.mp3",
+      "audio_kind": "original",
+      "source": {
+        "id": "nsq-156-official-mp3",
+        "title": "No Stupid Questions #156 · How Do You Connect With Someone You Just Met?",
+        "start": 544.34,
+        "end": 550.9,
+        "script_url": "https://freakonomics.com/podcast/how-do-you-connect-with-someone-you-just-met/"
+      },
+      "verification": {
+        "decode": "pass",
+        "transcript": "unverified",
+        "boundaries": "unverified",
+        "listening": "unverified"
+      }
+    }
+  ],
+  "header": {
+    "languages": "英语 / 中文",
+    "source": "No Stupid Questions",
+    "meta": "{count} 张卡片 · 播客原声"
+  },
+  "draft": true,
+  "missing_ids": []
+}

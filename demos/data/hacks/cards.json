@@ -1,0 +1,219 @@
+{
+  "schema_version": 1,
+  "stage": "sample",
+  "target_lang": "en",
+  "target_dir": "ltr",
+  "explanation_lang": "zh-CN",
+  "dir": "ltr",
+  "ui": {
+    "home": "返回首页",
+    "theme": "切换主题",
+    "listen": "先听声音",
+    "play": "播放",
+    "pause": "暂停",
+    "replay": "重听",
+    "slow": "慢速",
+    "front_hint": "轻点卡片翻面",
+    "back_hint": "看提示，再用自己的话说",
+    "scene": "情景",
+    "purpose": "对话目的",
+    "details": "台词与解析",
+    "close": "关闭",
+    "translation_show": "显示中文",
+    "translation_hide": "隐藏中文",
+    "previous": "上一张",
+    "next": "下一张",
+    "shuffle_on": "已开启乱序",
+    "shuffle_off": "已关闭乱序",
+    "need_listen": "再听听",
+    "with_hints": "看提示能说",
+    "independent": "可以独立说",
+    "saved": "已保存",
+    "playing": "播放中…",
+    "play_error": "音频暂时无法播放",
+    "missing": "暂无音频",
+    "draft": "样张：复用原有选段；逐字听感和切点仍待复核。",
+    "original": "剧集原声",
+    "synth": "合成语音",
+    "library_title": "原声案例",
+    "open_deck": "打开卡组",
+    "source": "来源",
+    "notes": "补充",
+    "export_progress": "导出进度",
+    "import_progress": "导入进度",
+    "import_error": "进度导入失败",
+    "progress_loaded": "进度已导入"
+  },
+  "id": "demo-hacks-three-case",
+  "title": "绝望写手 · Hacks",
+  "header": {
+    "languages": "英语 / 中文",
+    "source": "绝望写手 · Hacks",
+    "meta": "{count} 张卡片 · 剧集原声"
+  },
+  "profile": {
+    "level": "Sample; no formal learner assessment",
+    "goal": "提出建议、表达独立处理、提出接待需求",
+    "tts_allowed": false,
+    "batch_size": 3
+  },
+  "cards": [
+    {
+      "id": "hacks-dialogue-03",
+      "scene": "客户要求经纪人处理问题，经纪人提出一个新办法。",
+      "purpose": "要求行动 → 答应处理 → 提出建议。",
+      "hints": [
+        {
+          "expression": "do something about…",
+          "meaning": "采取行动处理……"
+        },
+        {
+          "expression": "What if you…?",
+          "meaning": "要不你……？"
+        }
+      ],
+      "turns": [
+        {
+          "speaker": "客户",
+          "text": "You gotta do something about this, Jimmy.",
+          "translation": "你得处理这件事，Jimmy。"
+        },
+        {
+          "speaker": "经纪人",
+          "text": "Okay, I will call Marty.",
+          "translation": "好，我会给 Marty 打电话。"
+        },
+        {
+          "speaker": "客户",
+          "text": "Marty?",
+          "translation": "Marty？"
+        },
+        {
+          "speaker": "经纪人",
+          "text": "Marty, yes. But um, I have a pitch.",
+          "translation": "对，Marty。不过，呃，我有个提议。"
+        },
+        {
+          "speaker": "经纪人",
+          "text": "What if you hire a writer?",
+          "translation": "要不你雇个编剧呢？"
+        }
+      ],
+      "notes": "You gotta… 语气直接，适合熟人或有明确工作关系的场景。What if you…? 用来提出一个可考虑的办法。",
+      "audio": "audio/hacks/five-02.mp3",
+      "audio_kind": "original",
+      "source": {
+        "id": "hacks-s01e01",
+        "title": "绝望写手 · Hacks S01E01",
+        "start": 524.4,
+        "end": 535.1,
+        "script_url": "https://luna-j.github.io/travel-flashcards/shadowing.html"
+      },
+      "verification": {
+        "decode": "pass",
+        "transcript": "unverified",
+        "boundaries": "unverified",
+        "listening": "unverified"
+      }
+    },
+    {
+      "id": "hacks-five-own",
+      "scene": "求职受挫后，一方表示要自己解决，另一方试图挽留。",
+      "purpose": "说明仍有其他选择 → 表示自己处理 → 挽留对方。",
+      "hints": [
+        {
+          "expression": "handle this on my own",
+          "meaning": "自己处理这件事"
+        },
+        {
+          "expression": "Come on.",
+          "meaning": "拜托／别这样（看语气）"
+        }
+      ],
+      "turns": [
+        {
+          "speaker": "A",
+          "text": "I know you think you’ve called everyone, but I actually have a lot of friends who will help me, so I guess I’ll just handle this on my own.",
+          "translation": "我知道你觉得已经联系过所有人了，但其实我有很多愿意帮我的朋友，所以我想还是自己处理吧。"
+        },
+        {
+          "speaker": "B",
+          "text": "Ava, come on.",
+          "translation": "Ava，别这样。"
+        }
+      ],
+      "notes": "on my own 表示自己独立完成。这里的 come on 是挽留或劝说，不是催人加速。长句不必逐字复述，先抓“我还有人能帮忙，我自己处理”。",
+      "audio": "audio/hacks/five-04.mp3",
+      "audio_kind": "original",
+      "source": {
+        "id": "hacks-s01e01",
+        "title": "绝望写手 · Hacks S01E01",
+        "start": 607.3,
+        "end": 618.2,
+        "script_url": "https://luna-j.github.io/travel-flashcards/shadowing.html"
+      },
+      "verification": {
+        "decode": "pass",
+        "transcript": "unverified",
+        "boundaries": "unverified",
+        "listening": "unverified"
+      }
+    },
+    {
+      "id": "hacks-five-parking",
+      "scene": "离开办公室前，前台询问是否需要停车优惠验证。",
+      "purpose": "询问需要 → 确认 → 告知要等一下并找人帮忙。",
+      "hints": [
+        {
+          "expression": "Do you need…?",
+          "meaning": "你需要……吗？"
+        },
+        {
+          "expression": "That’s gonna take me a minute.",
+          "meaning": "我需要一点时间。"
+        }
+      ],
+      "turns": [
+        {
+          "speaker": "前台",
+          "text": "Girly, do you need validation?",
+          "translation": "姑娘，你需要停车优惠验证吗？"
+        },
+        {
+          "speaker": "访客",
+          "text": "Yeah.",
+          "translation": "需要。"
+        },
+        {
+          "speaker": "前台",
+          "text": "Oh, God. Crap, girl. That’s gonna take me a minute. Bill, can you get Kelly to help me?",
+          "translation": "哎呀，糟了，姑娘，这得花我一点时间。Bill，你能叫 Kelly 来帮我吗？"
+        }
+      ],
+      "notes": "gonna 是 going to 的口语形式。take me a minute 常表示需要一点时间，不一定恰好一分钟。girly/girl 很随意；crap 是轻度粗口，无需照搬。",
+      "audio": "audio/hacks/five-05.mp3",
+      "audio_kind": "original",
+      "source": {
+        "id": "hacks-s01e01",
+        "title": "绝望写手 · Hacks S01E01",
+        "start": 619.5,
+        "end": 630.0,
+        "script_url": "https://luna-j.github.io/travel-flashcards/shadowing.html"
+      },
+      "verification": {
+        "decode": "pass",
+        "transcript": "unverified",
+        "boundaries": "unverified",
+        "listening": "unverified"
+      }
+    }
+  ],
+  "sample_review": {
+    "status": "pending",
+    "response": "",
+    "scope": "Public demonstration; private feedback is not included"
+  },
+  "home_href": "index.html",
+  "draft": true,
+  "missing_ids": []
+}

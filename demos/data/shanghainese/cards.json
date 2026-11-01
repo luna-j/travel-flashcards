@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "id": "demo-b-for-busy-wuu-through-en",
+  "title": "爱情神话 · B for Busy",
+  "subtitle": "沪语 / Shanghainese · 3 cards",
+  "stage": "sample",
+  "target_lang": "wuu",
+  "target_dir": "ltr",
+  "explanation_lang": "en",
+  "dir": "ltr",
+  "home_href": "index.html",
+  "profile": {
+    "level": "Sample; no formal learner assessment",
+    "goal": "Feel and reuse everyday Shanghainese responses, with English guidance",
+    "tts_allowed": false,
+    "batch_size": 3
+  },
+  "sample_review": {
+    "status": "pending",
+    "response": "",
+    "scope": "Public demonstration; private feedback is not included"
+  },
+  "script_notice": "Chinese text below follows the film’s on-screen subtitles. It is a meaning cue, not a verified word-for-word Shanghainese transcript. Follow the recording for pronunciation.",
+  "cards": [
+    {
+      "id": "bfb-help",
+      "heading": "Checking before helping",
+      "scene": "Bai agrees to help on a film set. He checks what the job involves.",
+      "purpose": "Check a detail, then confirm you can help.",
+      "hints": [
+        {
+          "expression": "对吗？",
+          "meaning": "Check that you understood correctly."
+        },
+        {
+          "expression": "可以啊",
+          "meaning": "A straightforward yes."
+        }
+      ],
+      "turns": [
+        {
+          "speaker": "Bai",
+          "text": "就用用手对吗？",
+          "translation": "You only need my hands, right?",
+          "text_kind": "subtitle_cue"
+        },
+        {
+          "speaker": "Bai",
+          "text": "要换衣服吗？",
+          "translation": "Do I need to change clothes?",
+          "text_kind": "subtitle_cue"
+        },
+        {
+          "speaker": "Ms Li",
+          "text": "真的可以吗？",
+          "translation": "Are you sure you can help?",
+          "text_kind": "subtitle_cue"
+        },
+        {
+          "speaker": "Bai",
+          "text": "可以啊，可以啊。",
+          "translation": "Yes, of course.",
+          "text_kind": "subtitle_cue"
+        },
+        {
+          "speaker": "Ms Li",
+          "text": "那我问下导演。",
+          "translation": "Then I’ll check with the director.",
+          "text_kind": "subtitle_cue"
+        }
+      ],
+      "notes": "The job is a hand double: only his hands will appear on camera. Listen for the short repeated confirmation; imitate the recording rather than reading these subtitle cues in Mandarin.",
+      "audio": "audio/shanghainese/help.mp3",
+      "audio_kind": "original",
+      "source": {
+        "id": "youtube-context-1550",
+        "title": "B for Busy (2021) · MQC4s3sXl9w · local context excerpt",
+        "start": 20.8,
+        "end": 28.8,
+        "script_url": "https://www.youtube.com/watch?v=MQC4s3sXl9w",
+        "original_time_approx": 1567.04,
+        "timeline": "Seconds within context-1550.mkv; section copy retains a preceding video keyframe. Original YouTube time is approximate."
+      },
+      "verification": {
+        "decode": "pass",
+        "transcript": "unverified",
+        "boundaries": "unverified",
+        "listening": "unverified"
+      }
+    },
+    {
+      "id": "bfb-work",
+      "heading": "Finding out about someone",
+      "scene": "Ms Li discovers that Bai used to have a job. A small tease keeps the conversation going.",
+      "purpose": "Show surprise and ask how someone knows about you.",
+      "hints": [
+        {
+          "expression": "我还以为……",
+          "meaning": "I had assumed…; gently correct an earlier impression."
+        },
+        {
+          "expression": "……你也晓得啊？",
+          "meaning": "You even know…? An incredulous follow-up; this cue follows the screen wording."
+        }
+      ],
+      "turns": [
+        {
+          "speaker": "Ms Li",
+          "text": "你老早上过班啊？",
+          "translation": "You used to have a job?",
+          "text_kind": "subtitle_cue"
+        },
+        {
+          "speaker": "Ms Li",
+          "text": "我还当你就靠几套房子收收房租。",
+          "translation": "I thought you just lived off rent from your properties.",
+          "text_kind": "subtitle_cue"
+        },
+        {
+          "speaker": "Bai",
+          "text": "我几套房子你也晓得啊？",
+          "translation": "You even know how many properties I have?",
+          "text_kind": "subtitle_cue"
+        },
+        {
+          "speaker": "Ms Li",
+          "text": "吴小云说的呀。",
+          "translation": "Xiaoyun told me.",
+          "text_kind": "subtitle_cue"
+        }
+      ],
+      "notes": "This is personal banter, not a neutral question for a stranger. The subtitles preserve some local wording, but are not a phonetic guide. The cue 我还以为 paraphrases the meaning of 我还当 rather than claiming to transcribe the audio.",
+      "audio": "audio/shanghainese/work.mp3",
+      "audio_kind": "original",
+      "source": {
+        "id": "youtube-context-1550",
+        "title": "B for Busy (2021) · MQC4s3sXl9w · local context excerpt",
+        "start": 85.2,
+        "end": 95.5,
+        "script_url": "https://www.youtube.com/watch?v=MQC4s3sXl9w",
+        "original_time_approx": 1631.44,
+        "timeline": "Seconds within context-1550.mkv; section copy retains a preceding video keyframe. Original YouTube time is approximate."
+      },
+      "verification": {
+        "decode": "pass",
+        "transcript": "unverified",
+        "boundaries": "unverified",
+        "listening": "unverified"
+      }
+    },
+    {
+      "id": "bfb-downhill",
+      "heading": "A sharp answer, a warm comeback",
+      "scene": "They talk about the direction her life has taken. She makes a self-deprecating joke; he offers a playful invitation.",
+      "purpose": "Catch the double meaning, then respond without making the mood heavier.",
+      "hints": [
+        {
+          "expression": "下坡路",
+          "meaning": "Going downhill: both an easy descent and a life getting worse."
+        },
+        {
+          "expression": "改天……好吧？",
+          "meaning": "Turn the image into a casual invitation for another day."
+        }
+      ],
+      "turns": [
+        {
+          "speaker": "Bai",
+          "text": "那你觉得这条路走得顺利吗？",
+          "translation": "Has that path worked out smoothly for you?",
+          "text_kind": "subtitle_cue"
+        },
+        {
+          "speaker": "Ms Li",
+          "text": "下坡路呀，能走得不顺吗？",
+          "translation": "It’s downhill. How could it not be smooth?",
+          "text_kind": "subtitle_cue"
+        },
+        {
+          "speaker": "Bai",
+          "text": "那改天我约你去爬山好吧。",
+          "translation": "Then let’s go hiking sometime, shall we?",
+          "text_kind": "subtitle_cue"
+        }
+      ],
+      "notes": "The wit comes from two senses of downhill. His hiking reply picks up her image and gently changes its direction. Leave room for the pause before the comeback. These Chinese lines are subtitle cues, not a verified dialect transcription.",
+      "audio": "audio/shanghainese/downhill.mp3",
+      "audio_kind": "original",
+      "source": {
+        "id": "youtube-context-1550",
+        "title": "B for Busy (2021) · MQC4s3sXl9w · local context excerpt",
+        "start": 124.5,
+        "end": 136.8,
+        "script_url": "https://www.youtube.com/watch?v=MQC4s3sXl9w",
+        "original_time_approx": 1670.74,
+        "timeline": "Seconds within context-1550.mkv; section copy retains a preceding video keyframe. Original YouTube time is approximate."
+      },
+      "verification": {
+        "decode": "pass",
+        "transcript": "unverified",
+        "boundaries": "unverified",
+        "listening": "unverified"
+      }
+    }
+  ],
+  "ui": {
+    "home": "Home",
+    "theme": "Switch theme",
+    "listen": "Listen first",
+    "play": "Play",
+    "pause": "Pause",
+    "replay": "Replay",
+    "slow": "Slow",
+    "front_hint": "Tap to reveal the situation",
+    "back_hint": "Use the cues, then say it your way",
+    "scene": "Situation",
+    "purpose": "Your goal",
+    "details": "Subtitle cues & notes",
+    "close": "Close",
+    "translation_show": "Show English",
+    "translation_hide": "Hide English",
+    "previous": "Previous",
+    "next": "Next",
+    "shuffle_on": "Shuffle on",
+    "shuffle_off": "Shuffle off",
+    "need_listen": "Listen again",
+    "with_hints": "With cues",
+    "independent": "On my own",
+    "saved": "Saved",
+    "playing": "Playing…",
+    "play_error": "Audio could not play",
+    "missing": "Audio unavailable",
+    "draft": "Sample: subtitle cues are checked against frames; dialect transcription and listening review remain pending.",
+    "original": "Original film audio",
+    "synth": "Synthesized audio",
+    "library_title": "Case library",
+    "open_deck": "Open sample",
+    "source": "Source",
+    "notes": "Notes",
+    "export_progress": "Export progress",
+    "import_progress": "Import progress",
+    "import_error": "Could not import progress",
+    "progress_loaded": "Progress imported"
+  },
+  "header": {
+    "languages": "沪语 / English",
+    "source": "爱情神话 · B for Busy",
+    "meta": "{count} cards · Film audio"
+  },
+  "draft": true,
+  "missing_ids": []
+}

@@ -1,5 +1,6 @@
 [
   {"id":"sejong1-lesson1","type":"korean","tag":"한국어 · 世宗实用韩语 1","title":"第一课 · 国家与职业","description":"1-1、1-2 共 48 张单词与语法卡，教材真人录音优先，缺失用 Yuna 合成语音补齐。","href":"sejong-lesson1.html","action":"开始复习 →"},
+  {"id":"sejong1-lesson2","type":"korean","tag":"한국어 · 世宗实用韩语 1","title":"第二课 · 日常动作与场所","description":"2-1、2-2 共 53 张词汇与语法卡，动词变形对照、目的地表达与慢速语音。","href":"sejong-lesson2.html","action":"开始复习 →"},
   {"id":"travel-english","type":"english","tag":"ENGLISH","title":"旅行英语 100 句","description":"真实旅行场景、自然朗读、分类复习。","href":"english.html","action":"开始复习 →"},
   {"id":"travel-korean","type":"korean","tag":"한국어","title":"旅行韩语 100 句","description":"中文提示、罗马音、Yuna 固定录音。","href":"korean.html","action":"开始复习 →"},
   {"id":"korean-pronunciation","type":"sound","tag":"한글 SOUND","title":"韩语字母与拼音","description":"40 个字母、拼读规则、简短联想与 Yuna 录音。","href":"korean-pronunciation.html","action":"学习发音 →"},
